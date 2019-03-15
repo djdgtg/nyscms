@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.retech.nyscms.mapper.FrontFavoriteMapper" >
+  <resultMap id="BaseResultMap" type="com.retech.nyscms.entity.FrontFavorite" >
+    <id column="seqID" property="seqid" jdbcType="INTEGER" />
+    
+    <!-- 用户id -->
+    <result column="userID" property="userid" jdbcType="INTEGER" />
+    
+    <!-- 图书id -->
+    <result column="eBookID" property="ebookid" jdbcType="INTEGER" />
+    <result column="createdTime" property="createdtime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    
+    <!-- 对应平台 -->
+    <result column="platform" property="platform" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    seqID, userID, eBookID, createdTime, status, platform, sort
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.retech.nyscms.entity.FrontFavoriteExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from front_favorite
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from front_favorite
+    where seqID = #{seqid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from front_favorite
+    where seqID = #{seqid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.retech.nyscms.entity.FrontFavoriteExample" >
+    delete from front_favorite
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" >
+    insert into front_favorite (seqID, userID, eBookID, 
+      createdTime, status, platform, 
+      sort)
+    values (#{seqid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{ebookid,jdbcType=INTEGER}, 
+      #{createdtime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, #{platform,jdbcType=VARCHAR}, 
+      #{sort,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" >
+    insert into front_favorite
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="seqid != null" >
+        seqID,
+      </if>
+      <if test="userid != null" >
+        userID,
+      </if>
+      <if test="ebookid != null" >
+        eBookID,
+      </if>
+      <if test="createdtime != null" >
+        createdTime,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="platform != null" >
+        platform,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="seqid != null" >
+        #{seqid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="ebookid != null" >
+        #{ebookid,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        #{createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="platform != null" >
+        #{platform,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.retech.nyscms.entity.FrontFavoriteExample" resultType="java.lang.Integer" >
+    select count(*) from front_favorite
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update front_favorite
+    <set >
+      <if test="record.seqid != null" >
+        seqID = #{record.seqid,jdbcType=INTEGER},
+      </if>
+      <if test="record.userid != null" >
+        userID = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.ebookid != null" >
+        eBookID = #{record.ebookid,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdtime != null" >
+        createdTime = #{record.createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.platform != null" >
+        platform = #{record.platform,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sort != null" >
+        sort = #{record.sort,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update front_favorite
+    set seqID = #{record.seqid,jdbcType=INTEGER},
+      userID = #{record.userid,jdbcType=INTEGER},
+      eBookID = #{record.ebookid,jdbcType=INTEGER},
+      createdTime = #{record.createdtime,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=INTEGER},
+      platform = #{record.platform,jdbcType=VARCHAR},
+      sort = #{record.sort,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" >
+    update front_favorite
+    <set >
+      <if test="userid != null" >
+        userID = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="ebookid != null" >
+        eBookID = #{ebookid,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        createdTime = #{createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="platform != null" >
+        platform = #{platform,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where seqID = #{seqid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" >
+    update front_favorite
+    set userID = #{userid,jdbcType=INTEGER},
+      eBookID = #{ebookid,jdbcType=INTEGER},
+      createdTime = #{createdtime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      platform = #{platform,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=VARCHAR}
+    where seqID = #{seqid,jdbcType=INTEGER}
+  </update>
+  
+  <!-- ### 以上代码由MBG + CommentPlugin自动生成, 生成时间: 2019-03-04 11:42:34 ### -->
+
+
+
+  <!-- Your codes goes here!!! -->
+  
+</mapper>

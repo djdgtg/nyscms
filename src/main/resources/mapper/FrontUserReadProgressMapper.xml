@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.retech.nyscms.mapper.FrontUserReadProgressMapper" >
+  <resultMap id="BaseResultMap" type="com.retech.nyscms.entity.FrontUserReadProgress" >
+    
+    <!-- 用户id -->
+    <id column="fk_user_id" property="fkUserId" jdbcType="INTEGER" />
+    
+    <!-- 图书id -->
+    <id column="fk_book_id" property="fkBookId" jdbcType="INTEGER" />
+    
+    <!-- 章节索引 -->
+    <result column="chapter_index" property="chapterIndex" jdbcType="VARCHAR" />
+    
+    <!-- 阅读坐标 -->
+    <result column="position" property="position" jdbcType="VARCHAR" />
+    
+    <!-- 阅读进度 -->
+    <result column="progress" property="progress" jdbcType="VARCHAR" />
+    
+    <!-- 添加时间 -->
+    <result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
+    
+    <!-- 更新时间 -->
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    fk_user_id, fk_book_id, chapter_index, position, progress, add_time, update_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.retech.nyscms.entity.FrontUserReadProgressExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from front_user_read_progress
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.retech.nyscms.entity.FrontUserReadProgressKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from front_user_read_progress
+    where fk_user_id = #{fkUserId,jdbcType=INTEGER}
+      and fk_book_id = #{fkBookId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.retech.nyscms.entity.FrontUserReadProgressKey" >
+    delete from front_user_read_progress
+    where fk_user_id = #{fkUserId,jdbcType=INTEGER}
+      and fk_book_id = #{fkBookId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.retech.nyscms.entity.FrontUserReadProgressExample" >
+    delete from front_user_read_progress
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" >
+    insert into front_user_read_progress (fk_user_id, fk_book_id, chapter_index, 
+      position, progress, add_time, 
+      update_time)
+    values (#{fkUserId,jdbcType=INTEGER}, #{fkBookId,jdbcType=INTEGER}, #{chapterIndex,jdbcType=VARCHAR}, 
+      #{position,jdbcType=VARCHAR}, #{progress,jdbcType=VARCHAR}, #{addTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" >
+    insert into front_user_read_progress
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fkUserId != null" >
+        fk_user_id,
+      </if>
+      <if test="fkBookId != null" >
+        fk_book_id,
+      </if>
+      <if test="chapterIndex != null" >
+        chapter_index,
+      </if>
+      <if test="position != null" >
+        position,
+      </if>
+      <if test="progress != null" >
+        progress,
+      </if>
+      <if test="addTime != null" >
+        add_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fkUserId != null" >
+        #{fkUserId,jdbcType=INTEGER},
+      </if>
+      <if test="fkBookId != null" >
+        #{fkBookId,jdbcType=INTEGER},
+      </if>
+      <if test="chapterIndex != null" >
+        #{chapterIndex,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="progress != null" >
+        #{progress,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.retech.nyscms.entity.FrontUserReadProgressExample" resultType="java.lang.Integer" >
+    select count(*) from front_user_read_progress
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update front_user_read_progress
+    <set >
+      <if test="record.fkUserId != null" >
+        fk_user_id = #{record.fkUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.fkBookId != null" >
+        fk_book_id = #{record.fkBookId,jdbcType=INTEGER},
+      </if>
+      <if test="record.chapterIndex != null" >
+        chapter_index = #{record.chapterIndex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.position != null" >
+        position = #{record.position,jdbcType=VARCHAR},
+      </if>
+      <if test="record.progress != null" >
+        progress = #{record.progress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addTime != null" >
+        add_time = #{record.addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update front_user_read_progress
+    set fk_user_id = #{record.fkUserId,jdbcType=INTEGER},
+      fk_book_id = #{record.fkBookId,jdbcType=INTEGER},
+      chapter_index = #{record.chapterIndex,jdbcType=VARCHAR},
+      position = #{record.position,jdbcType=VARCHAR},
+      progress = #{record.progress,jdbcType=VARCHAR},
+      add_time = #{record.addTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" >
+    update front_user_read_progress
+    <set >
+      <if test="chapterIndex != null" >
+        chapter_index = #{chapterIndex,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        position = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="progress != null" >
+        progress = #{progress,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        add_time = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where fk_user_id = #{fkUserId,jdbcType=INTEGER}
+      and fk_book_id = #{fkBookId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" >
+    update front_user_read_progress
+    set chapter_index = #{chapterIndex,jdbcType=VARCHAR},
+      position = #{position,jdbcType=VARCHAR},
+      progress = #{progress,jdbcType=VARCHAR},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where fk_user_id = #{fkUserId,jdbcType=INTEGER}
+      and fk_book_id = #{fkBookId,jdbcType=INTEGER}
+  </update>
+  
+  <!-- ### 以上代码由MBG + CommentPlugin自动生成, 生成时间: 2019-03-04 11:42:34 ### -->
+
+
+
+  <!-- Your codes goes here!!! -->
+  
+</mapper>

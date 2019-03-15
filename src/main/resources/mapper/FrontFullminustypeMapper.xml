@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.retech.nyscms.mapper.FrontFullminustypeMapper" >
+  <resultMap id="BaseResultMap" type="com.retech.nyscms.entity.FrontFullminustype" >
+    <id column="seqid" property="seqid" jdbcType="INTEGER" />
+    
+    <!-- 满减类型 -->
+    <result column="fullminusType" property="fullminustype" jdbcType="VARCHAR" />
+    
+    <!-- 英文满减类型 -->
+    <result column="en_fullminusType" property="enFullminustype" jdbcType="VARCHAR" />
+    
+    <!-- 满额 -->
+    <result column="fullMoney" property="fullmoney" jdbcType="REAL" />
+    
+    <!-- 减额 -->
+    <result column="minusMoney" property="minusmoney" jdbcType="REAL" />
+    
+    <!-- 备忘录 -->
+    <result column="memo" property="memo" jdbcType="VARCHAR" />
+    
+    <!-- 开始时间 -->
+    <result column="starttime" property="starttime" jdbcType="TIMESTAMP" />
+    
+    <!-- 结束时间 -->
+    <result column="endtime" property="endtime" jdbcType="TIMESTAMP" />
+    
+    <!-- 英文备忘录 -->
+    <result column="en_memo" property="enMemo" jdbcType="VARCHAR" />
+    
+    <!-- 满减券数量 -->
+    <result column="num" property="num" jdbcType="INTEGER" />
+    
+    <!-- 线上卡：1  线下卡：0 -->
+    <result column="isonline" property="isonline" jdbcType="INTEGER" />
+    
+    <!-- 是否生成卡券：否:0,是:1。 -->
+    <result column="isbuild" property="isbuild" jdbcType="INTEGER" />
+    <result column="createdtime" property="createdtime" jdbcType="TIMESTAMP" />
+    <result column="creatorid" property="creatorid" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    seqid, fullminusType, en_fullminusType, fullMoney, minusMoney, memo, starttime, endtime, 
+    en_memo, num, isonline, isbuild, createdtime, creatorid, status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.retech.nyscms.entity.FrontFullminustypeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from front_fullminustype
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from front_fullminustype
+    where seqid = #{seqid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from front_fullminustype
+    where seqid = #{seqid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.retech.nyscms.entity.FrontFullminustypeExample" >
+    delete from front_fullminustype
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" >
+    insert into front_fullminustype (seqid, fullminusType, en_fullminusType, 
+      fullMoney, minusMoney, memo, 
+      starttime, endtime, en_memo, 
+      num, isonline, isbuild, 
+      createdtime, creatorid, status
+      )
+    values (#{seqid,jdbcType=INTEGER}, #{fullminustype,jdbcType=VARCHAR}, #{enFullminustype,jdbcType=VARCHAR}, 
+      #{fullmoney,jdbcType=REAL}, #{minusmoney,jdbcType=REAL}, #{memo,jdbcType=VARCHAR}, 
+      #{starttime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP}, #{enMemo,jdbcType=VARCHAR}, 
+      #{num,jdbcType=INTEGER}, #{isonline,jdbcType=INTEGER}, #{isbuild,jdbcType=INTEGER}, 
+      #{createdtime,jdbcType=TIMESTAMP}, #{creatorid,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" >
+    insert into front_fullminustype
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="seqid != null" >
+        seqid,
+      </if>
+      <if test="fullminustype != null" >
+        fullminusType,
+      </if>
+      <if test="enFullminustype != null" >
+        en_fullminusType,
+      </if>
+      <if test="fullmoney != null" >
+        fullMoney,
+      </if>
+      <if test="minusmoney != null" >
+        minusMoney,
+      </if>
+      <if test="memo != null" >
+        memo,
+      </if>
+      <if test="starttime != null" >
+        starttime,
+      </if>
+      <if test="endtime != null" >
+        endtime,
+      </if>
+      <if test="enMemo != null" >
+        en_memo,
+      </if>
+      <if test="num != null" >
+        num,
+      </if>
+      <if test="isonline != null" >
+        isonline,
+      </if>
+      <if test="isbuild != null" >
+        isbuild,
+      </if>
+      <if test="createdtime != null" >
+        createdtime,
+      </if>
+      <if test="creatorid != null" >
+        creatorid,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="seqid != null" >
+        #{seqid,jdbcType=INTEGER},
+      </if>
+      <if test="fullminustype != null" >
+        #{fullminustype,jdbcType=VARCHAR},
+      </if>
+      <if test="enFullminustype != null" >
+        #{enFullminustype,jdbcType=VARCHAR},
+      </if>
+      <if test="fullmoney != null" >
+        #{fullmoney,jdbcType=REAL},
+      </if>
+      <if test="minusmoney != null" >
+        #{minusmoney,jdbcType=REAL},
+      </if>
+      <if test="memo != null" >
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enMemo != null" >
+        #{enMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null" >
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="isonline != null" >
+        #{isonline,jdbcType=INTEGER},
+      </if>
+      <if test="isbuild != null" >
+        #{isbuild,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        #{createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatorid != null" >
+        #{creatorid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.retech.nyscms.entity.FrontFullminustypeExample" resultType="java.lang.Integer" >
+    select count(*) from front_fullminustype
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update front_fullminustype
+    <set >
+      <if test="record.seqid != null" >
+        seqid = #{record.seqid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fullminustype != null" >
+        fullminusType = #{record.fullminustype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enFullminustype != null" >
+        en_fullminusType = #{record.enFullminustype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fullmoney != null" >
+        fullMoney = #{record.fullmoney,jdbcType=REAL},
+      </if>
+      <if test="record.minusmoney != null" >
+        minusMoney = #{record.minusmoney,jdbcType=REAL},
+      </if>
+      <if test="record.memo != null" >
+        memo = #{record.memo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.starttime != null" >
+        starttime = #{record.starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endtime != null" >
+        endtime = #{record.endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.enMemo != null" >
+        en_memo = #{record.enMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.num != null" >
+        num = #{record.num,jdbcType=INTEGER},
+      </if>
+      <if test="record.isonline != null" >
+        isonline = #{record.isonline,jdbcType=INTEGER},
+      </if>
+      <if test="record.isbuild != null" >
+        isbuild = #{record.isbuild,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdtime != null" >
+        createdtime = #{record.createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.creatorid != null" >
+        creatorid = #{record.creatorid,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update front_fullminustype
+    set seqid = #{record.seqid,jdbcType=INTEGER},
+      fullminusType = #{record.fullminustype,jdbcType=VARCHAR},
+      en_fullminusType = #{record.enFullminustype,jdbcType=VARCHAR},
+      fullMoney = #{record.fullmoney,jdbcType=REAL},
+      minusMoney = #{record.minusmoney,jdbcType=REAL},
+      memo = #{record.memo,jdbcType=VARCHAR},
+      starttime = #{record.starttime,jdbcType=TIMESTAMP},
+      endtime = #{record.endtime,jdbcType=TIMESTAMP},
+      en_memo = #{record.enMemo,jdbcType=VARCHAR},
+      num = #{record.num,jdbcType=INTEGER},
+      isonline = #{record.isonline,jdbcType=INTEGER},
+      isbuild = #{record.isbuild,jdbcType=INTEGER},
+      createdtime = #{record.createdtime,jdbcType=TIMESTAMP},
+      creatorid = #{record.creatorid,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" >
+    update front_fullminustype
+    <set >
+      <if test="fullminustype != null" >
+        fullminusType = #{fullminustype,jdbcType=VARCHAR},
+      </if>
+      <if test="enFullminustype != null" >
+        en_fullminusType = #{enFullminustype,jdbcType=VARCHAR},
+      </if>
+      <if test="fullmoney != null" >
+        fullMoney = #{fullmoney,jdbcType=REAL},
+      </if>
+      <if test="minusmoney != null" >
+        minusMoney = #{minusmoney,jdbcType=REAL},
+      </if>
+      <if test="memo != null" >
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null" >
+        starttime = #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        endtime = #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enMemo != null" >
+        en_memo = #{enMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null" >
+        num = #{num,jdbcType=INTEGER},
+      </if>
+      <if test="isonline != null" >
+        isonline = #{isonline,jdbcType=INTEGER},
+      </if>
+      <if test="isbuild != null" >
+        isbuild = #{isbuild,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        createdtime = #{createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatorid != null" >
+        creatorid = #{creatorid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where seqid = #{seqid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" >
+    update front_fullminustype
+    set fullminusType = #{fullminustype,jdbcType=VARCHAR},
+      en_fullminusType = #{enFullminustype,jdbcType=VARCHAR},
+      fullMoney = #{fullmoney,jdbcType=REAL},
+      minusMoney = #{minusmoney,jdbcType=REAL},
+      memo = #{memo,jdbcType=VARCHAR},
+      starttime = #{starttime,jdbcType=TIMESTAMP},
+      endtime = #{endtime,jdbcType=TIMESTAMP},
+      en_memo = #{enMemo,jdbcType=VARCHAR},
+      num = #{num,jdbcType=INTEGER},
+      isonline = #{isonline,jdbcType=INTEGER},
+      isbuild = #{isbuild,jdbcType=INTEGER},
+      createdtime = #{createdtime,jdbcType=TIMESTAMP},
+      creatorid = #{creatorid,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER}
+    where seqid = #{seqid,jdbcType=INTEGER}
+  </update>
+  
+  <!-- ### 以上代码由MBG + CommentPlugin自动生成, 生成时间: 2019-03-04 11:42:34 ### -->
+
+
+
+  <!-- Your codes goes here!!! -->
+  
+</mapper>

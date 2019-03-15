@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.retech.nyscms.mapper.FrontReadLogMapper" >
+  <resultMap id="BaseResultMap" type="com.retech.nyscms.entity.FrontReadLog" >
+    
+    <!-- 主题 -->
+    <id column="readID" property="readid" jdbcType="INTEGER" />
+    
+    <!-- 用户Id -->
+    <result column="userID" property="userid" jdbcType="INTEGER" />
+    
+    <!-- 书籍Id -->
+    <result column="ebookID" property="ebookid" jdbcType="INTEGER" />
+    
+    <!-- 阅读进度 -->
+    <result column="read_progress" property="readProgress" jdbcType="DOUBLE" />
+    
+    <!-- 阅读时间 -->
+    <result column="readTime" property="readtime" jdbcType="DOUBLE" />
+    
+    <!-- 阅读字数 -->
+    <result column="totalWord" property="totalword" jdbcType="INTEGER" />
+    <result column="createdTime" property="createdtime" jdbcType="TIMESTAMP" />
+    
+    <!-- 信息来源 -->
+    <result column="platform" property="platform" jdbcType="VARCHAR" />
+    
+    <!-- 当前页 -->
+    <result column="chapter_index" property="chapterIndex" jdbcType="VARCHAR" />
+    
+    <!-- 阅读坐标 -->
+    <result column="position" property="position" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    readID, userID, ebookID, read_progress, readTime, totalWord, createdTime, platform, 
+    chapter_index, position
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.retech.nyscms.entity.FrontReadLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from front_read_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from front_read_log
+    where readID = #{readid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from front_read_log
+    where readID = #{readid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.retech.nyscms.entity.FrontReadLogExample" >
+    delete from front_read_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" >
+    insert into front_read_log (readID, userID, ebookID, 
+      read_progress, readTime, totalWord, 
+      createdTime, platform, chapter_index, 
+      position)
+    values (#{readid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{ebookid,jdbcType=INTEGER}, 
+      #{readProgress,jdbcType=DOUBLE}, #{readtime,jdbcType=DOUBLE}, #{totalword,jdbcType=INTEGER}, 
+      #{createdtime,jdbcType=TIMESTAMP}, #{platform,jdbcType=VARCHAR}, #{chapterIndex,jdbcType=VARCHAR}, 
+      #{position,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" >
+    insert into front_read_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="readid != null" >
+        readID,
+      </if>
+      <if test="userid != null" >
+        userID,
+      </if>
+      <if test="ebookid != null" >
+        ebookID,
+      </if>
+      <if test="readProgress != null" >
+        read_progress,
+      </if>
+      <if test="readtime != null" >
+        readTime,
+      </if>
+      <if test="totalword != null" >
+        totalWord,
+      </if>
+      <if test="createdtime != null" >
+        createdTime,
+      </if>
+      <if test="platform != null" >
+        platform,
+      </if>
+      <if test="chapterIndex != null" >
+        chapter_index,
+      </if>
+      <if test="position != null" >
+        position,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="readid != null" >
+        #{readid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="ebookid != null" >
+        #{ebookid,jdbcType=INTEGER},
+      </if>
+      <if test="readProgress != null" >
+        #{readProgress,jdbcType=DOUBLE},
+      </if>
+      <if test="readtime != null" >
+        #{readtime,jdbcType=DOUBLE},
+      </if>
+      <if test="totalword != null" >
+        #{totalword,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        #{createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="platform != null" >
+        #{platform,jdbcType=VARCHAR},
+      </if>
+      <if test="chapterIndex != null" >
+        #{chapterIndex,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        #{position,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.retech.nyscms.entity.FrontReadLogExample" resultType="java.lang.Integer" >
+    select count(*) from front_read_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update front_read_log
+    <set >
+      <if test="record.readid != null" >
+        readID = #{record.readid,jdbcType=INTEGER},
+      </if>
+      <if test="record.userid != null" >
+        userID = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.ebookid != null" >
+        ebookID = #{record.ebookid,jdbcType=INTEGER},
+      </if>
+      <if test="record.readProgress != null" >
+        read_progress = #{record.readProgress,jdbcType=DOUBLE},
+      </if>
+      <if test="record.readtime != null" >
+        readTime = #{record.readtime,jdbcType=DOUBLE},
+      </if>
+      <if test="record.totalword != null" >
+        totalWord = #{record.totalword,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdtime != null" >
+        createdTime = #{record.createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.platform != null" >
+        platform = #{record.platform,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chapterIndex != null" >
+        chapter_index = #{record.chapterIndex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.position != null" >
+        position = #{record.position,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update front_read_log
+    set readID = #{record.readid,jdbcType=INTEGER},
+      userID = #{record.userid,jdbcType=INTEGER},
+      ebookID = #{record.ebookid,jdbcType=INTEGER},
+      read_progress = #{record.readProgress,jdbcType=DOUBLE},
+      readTime = #{record.readtime,jdbcType=DOUBLE},
+      totalWord = #{record.totalword,jdbcType=INTEGER},
+      createdTime = #{record.createdtime,jdbcType=TIMESTAMP},
+      platform = #{record.platform,jdbcType=VARCHAR},
+      chapter_index = #{record.chapterIndex,jdbcType=VARCHAR},
+      position = #{record.position,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" >
+    update front_read_log
+    <set >
+      <if test="userid != null" >
+        userID = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="ebookid != null" >
+        ebookID = #{ebookid,jdbcType=INTEGER},
+      </if>
+      <if test="readProgress != null" >
+        read_progress = #{readProgress,jdbcType=DOUBLE},
+      </if>
+      <if test="readtime != null" >
+        readTime = #{readtime,jdbcType=DOUBLE},
+      </if>
+      <if test="totalword != null" >
+        totalWord = #{totalword,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        createdTime = #{createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="platform != null" >
+        platform = #{platform,jdbcType=VARCHAR},
+      </if>
+      <if test="chapterIndex != null" >
+        chapter_index = #{chapterIndex,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        position = #{position,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where readID = #{readid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" >
+    update front_read_log
+    set userID = #{userid,jdbcType=INTEGER},
+      ebookID = #{ebookid,jdbcType=INTEGER},
+      read_progress = #{readProgress,jdbcType=DOUBLE},
+      readTime = #{readtime,jdbcType=DOUBLE},
+      totalWord = #{totalword,jdbcType=INTEGER},
+      createdTime = #{createdtime,jdbcType=TIMESTAMP},
+      platform = #{platform,jdbcType=VARCHAR},
+      chapter_index = #{chapterIndex,jdbcType=VARCHAR},
+      position = #{position,jdbcType=VARCHAR}
+    where readID = #{readid,jdbcType=INTEGER}
+  </update>
+  
+  <!-- ### 以上代码由MBG + CommentPlugin自动生成, 生成时间: 2019-03-04 11:42:34 ### -->
+
+
+
+  <!-- Your codes goes here!!! -->
+  
+</mapper>

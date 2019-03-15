@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.retech.nyscms.mapper.FrontAdvertisementMapper" >
+  <resultMap id="BaseResultMap" type="com.retech.nyscms.entity.FrontAdvertisement" >
+    <id column="seqid" property="seqid" jdbcType="INTEGER" />
+    
+    <!-- 广告链接地址 -->
+    <result column="adurl" property="adurl" jdbcType="VARCHAR" />
+    
+    <!-- 广告图片地址 -->
+    <result column="imghref" property="imghref" jdbcType="VARCHAR" />
+    
+    <!-- app广告图片地址 -->
+    <result column="app_imghref" property="appImghref" jdbcType="VARCHAR" />
+    
+    <!-- 浏览次数 -->
+    <result column="viewcount" property="viewcount" jdbcType="INTEGER" />
+    
+    <!-- 广告标题 -->
+    <result column="adtitle" property="adtitle" jdbcType="VARCHAR" />
+    
+    <!-- 排序 -->
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="createdtime" property="createdtime" jdbcType="TIMESTAMP" />
+    <result column="creatorid" property="creatorid" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    seqid, adurl, imghref, app_imghref, viewcount, adtitle, sort, createdtime, creatorid, 
+    status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.retech.nyscms.entity.FrontAdvertisementExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from front_advertisement
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from front_advertisement
+    where seqid = #{seqid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from front_advertisement
+    where seqid = #{seqid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.retech.nyscms.entity.FrontAdvertisementExample" >
+    delete from front_advertisement
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" >
+    insert into front_advertisement (seqid, adurl, imghref, 
+      app_imghref, viewcount, adtitle, 
+      sort, createdtime, creatorid, 
+      status)
+    values (#{seqid,jdbcType=INTEGER}, #{adurl,jdbcType=VARCHAR}, #{imghref,jdbcType=VARCHAR}, 
+      #{appImghref,jdbcType=VARCHAR}, #{viewcount,jdbcType=INTEGER}, #{adtitle,jdbcType=VARCHAR}, 
+      #{sort,jdbcType=INTEGER}, #{createdtime,jdbcType=TIMESTAMP}, #{creatorid,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" >
+    insert into front_advertisement
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="seqid != null" >
+        seqid,
+      </if>
+      <if test="adurl != null" >
+        adurl,
+      </if>
+      <if test="imghref != null" >
+        imghref,
+      </if>
+      <if test="appImghref != null" >
+        app_imghref,
+      </if>
+      <if test="viewcount != null" >
+        viewcount,
+      </if>
+      <if test="adtitle != null" >
+        adtitle,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="createdtime != null" >
+        createdtime,
+      </if>
+      <if test="creatorid != null" >
+        creatorid,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="seqid != null" >
+        #{seqid,jdbcType=INTEGER},
+      </if>
+      <if test="adurl != null" >
+        #{adurl,jdbcType=VARCHAR},
+      </if>
+      <if test="imghref != null" >
+        #{imghref,jdbcType=VARCHAR},
+      </if>
+      <if test="appImghref != null" >
+        #{appImghref,jdbcType=VARCHAR},
+      </if>
+      <if test="viewcount != null" >
+        #{viewcount,jdbcType=INTEGER},
+      </if>
+      <if test="adtitle != null" >
+        #{adtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        #{createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatorid != null" >
+        #{creatorid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.retech.nyscms.entity.FrontAdvertisementExample" resultType="java.lang.Integer" >
+    select count(*) from front_advertisement
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update front_advertisement
+    <set >
+      <if test="record.seqid != null" >
+        seqid = #{record.seqid,jdbcType=INTEGER},
+      </if>
+      <if test="record.adurl != null" >
+        adurl = #{record.adurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imghref != null" >
+        imghref = #{record.imghref,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appImghref != null" >
+        app_imghref = #{record.appImghref,jdbcType=VARCHAR},
+      </if>
+      <if test="record.viewcount != null" >
+        viewcount = #{record.viewcount,jdbcType=INTEGER},
+      </if>
+      <if test="record.adtitle != null" >
+        adtitle = #{record.adtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sort != null" >
+        sort = #{record.sort,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdtime != null" >
+        createdtime = #{record.createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.creatorid != null" >
+        creatorid = #{record.creatorid,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update front_advertisement
+    set seqid = #{record.seqid,jdbcType=INTEGER},
+      adurl = #{record.adurl,jdbcType=VARCHAR},
+      imghref = #{record.imghref,jdbcType=VARCHAR},
+      app_imghref = #{record.appImghref,jdbcType=VARCHAR},
+      viewcount = #{record.viewcount,jdbcType=INTEGER},
+      adtitle = #{record.adtitle,jdbcType=VARCHAR},
+      sort = #{record.sort,jdbcType=INTEGER},
+      createdtime = #{record.createdtime,jdbcType=TIMESTAMP},
+      creatorid = #{record.creatorid,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" >
+    update front_advertisement
+    <set >
+      <if test="adurl != null" >
+        adurl = #{adurl,jdbcType=VARCHAR},
+      </if>
+      <if test="imghref != null" >
+        imghref = #{imghref,jdbcType=VARCHAR},
+      </if>
+      <if test="appImghref != null" >
+        app_imghref = #{appImghref,jdbcType=VARCHAR},
+      </if>
+      <if test="viewcount != null" >
+        viewcount = #{viewcount,jdbcType=INTEGER},
+      </if>
+      <if test="adtitle != null" >
+        adtitle = #{adtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        createdtime = #{createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatorid != null" >
+        creatorid = #{creatorid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where seqid = #{seqid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" >
+    update front_advertisement
+    set adurl = #{adurl,jdbcType=VARCHAR},
+      imghref = #{imghref,jdbcType=VARCHAR},
+      app_imghref = #{appImghref,jdbcType=VARCHAR},
+      viewcount = #{viewcount,jdbcType=INTEGER},
+      adtitle = #{adtitle,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      createdtime = #{createdtime,jdbcType=TIMESTAMP},
+      creatorid = #{creatorid,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER}
+    where seqid = #{seqid,jdbcType=INTEGER}
+  </update>
+  
+  <!-- ### 以上代码由MBG + CommentPlugin自动生成, 生成时间: 2019-03-04 11:42:34 ### -->
+
+
+
+  <!-- Your codes goes here!!! -->
+  
+</mapper>

@@ -1,0 +1,1062 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.retech.nyscms.mapper.FrontUserInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.retech.nyscms.entity.FrontUserInfo" >
+    
+    <!-- 主键 -->
+    <id column="seqid" property="seqid" jdbcType="INTEGER" />
+    
+    <!-- 手机号 -->
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    
+    <!-- 名称 -->
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    
+    <!-- 密码 -->
+    <result column="passwd" property="passwd" jdbcType="VARCHAR" />
+    
+    <!-- 年龄 -->
+    <result column="age" property="age" jdbcType="INTEGER" />
+    
+    <!-- 生日 -->
+    <result column="birthday" property="birthday" jdbcType="DATE" />
+    
+    <!-- 0:男,1:女 -->
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    
+    <!-- 邮箱 -->
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    
+    <!-- 地址 -->
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    
+    <!-- 兴趣 -->
+    <result column="interest" property="interest" jdbcType="VARCHAR" />
+    
+    <!-- 用户类型1:普通用户,3:机构用户,4:教师用户,5:学生用户 -->
+    <result column="userType" property="usertype" jdbcType="INTEGER" />
+    
+    <!-- 国家ID -->
+    <result column="country" property="country" jdbcType="INTEGER" />
+    
+    <!-- 国家名称 -->
+    <result column="countryName" property="countryname" jdbcType="VARCHAR" />
+    
+    <!-- 0:汉语,1:英语,2:其他语种 -->
+    <result column="motherTongue" property="mothertongue" jdbcType="VARCHAR" />
+    
+    <!-- 学习年限 -->
+    <result column="leanCHYear" property="leanchyear" jdbcType="INTEGER" />
+    
+    <!-- 国际移动设备身份码 -->
+    <result column="imei" property="imei" jdbcType="VARCHAR" />
+    
+    <!-- 国际移动用户识别码 -->
+    <result column="imsi" property="imsi" jdbcType="VARCHAR" />
+    
+    <!-- 学校类型：1.小学，2.中学，3.大学，4.教育机构 -->
+    <result column="schoolType" property="schooltype" jdbcType="INTEGER" />
+    
+    <!-- 1可以查看0：不可查看 -->
+    <result column="canview" property="canview" jdbcType="INTEGER" />
+    
+    <!-- 机构Id -->
+    <result column="organizationId" property="organizationid" jdbcType="INTEGER" />
+    
+    <!-- 教师状态 -->
+    <result column="teacherstatus" property="teacherstatus" jdbcType="VARCHAR" />
+    <result column="payPass" property="paypass" jdbcType="VARCHAR" />
+    
+    <!-- 教师状态 -->
+    <result column="classID" property="classid" jdbcType="INTEGER" />
+    
+    <!-- 0未验证，1验证成功 -->
+    <result column="emailStatus" property="emailstatus" jdbcType="INTEGER" />
+    
+    <!-- 0未验证，1验证成功 -->
+    <result column="phoneStatus" property="phonestatus" jdbcType="INTEGER" />
+    
+    <!-- 登陆地址 -->
+    <result column="loginIP" property="loginip" jdbcType="VARCHAR" />
+    
+    <!-- 最后登陆时间 -->
+    <result column="lastLoginTime" property="lastlogintime" jdbcType="TIMESTAMP" />
+    
+    <!-- 最后登陆Ip -->
+    <result column="lastIP" property="lastip" jdbcType="VARCHAR" />
+    <result column="terminalCode" property="terminalcode" jdbcType="VARCHAR" />
+    
+    <!-- 登陆验证token -->
+    <result column="token" property="token" jdbcType="VARCHAR" />
+    <result column="modifyTime" property="modifytime" jdbcType="TIMESTAMP" />
+    <result column="license" property="license" jdbcType="VARCHAR" />
+    
+    <!-- 头像 -->
+    <result column="iconUrl" property="iconurl" jdbcType="VARCHAR" />
+    <result column="readFinishNum" property="readfinishnum" jdbcType="INTEGER" />
+    
+    <!-- 1:正常，0：锁定，2未激活 -->
+    <result column="userStatus" property="userstatus" jdbcType="VARCHAR" />
+    <result column="userName" property="username" jdbcType="VARCHAR" />
+    <result column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="createdtime" property="createdtime" jdbcType="TIMESTAMP" />
+    <result column="creatorid" property="creatorid" jdbcType="INTEGER" />
+    
+    <!-- 1正常使用，0删除或未激活 -->
+    <result column="status" property="status" jdbcType="INTEGER" />
+    
+    <!-- 备注 -->
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    
+    <!-- 学校名称 -->
+    <result column="schoolName" property="schoolname" jdbcType="VARCHAR" />
+    
+    <!-- 可创建学习汉语学生数 -->
+    <result column="learnChNum" property="learnchnum" jdbcType="INTEGER" />
+    
+    <!-- 微信登陆唯一标识 -->
+    <result column="unionid" property="unionid" jdbcType="VARCHAR" />
+    
+    <!-- zas单点登录唯一标识 -->
+    <result column="accessId" property="accessid" jdbcType="INTEGER" />
+    
+    <!-- 用户在zas上所属的机构id -->
+    <result column="zasBranchId" property="zasbranchid" jdbcType="INTEGER" />
+    <result column="roletype" property="roletype" jdbcType="INTEGER" />
+    
+    <!-- 国家短信前置编码 -->
+    <result column="areacode" property="areacode" jdbcType="INTEGER" />
+    
+    <!-- 目前绑定数量 -->
+    <result column="bindingNum" property="bindingnum" jdbcType="INTEGER" />
+    
+    <!-- 最大绑定数量 -->
+    <result column="maxbindingNum" property="maxbindingnum" jdbcType="INTEGER" />
+    
+    <!-- 0失效,1包月全平台 -->
+    <result column="allbooks" property="allbooks" jdbcType="INTEGER" />
+    
+    <!-- 平台包月起始时间 -->
+    <result column="starttime" property="starttime" jdbcType="TIMESTAMP" />
+    
+    <!-- 平台包月结束时间 -->
+    <result column="endtime" property="endtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    seqid, phone, name, passwd, age, birthday, sex, email, address, interest, userType, 
+    country, countryName, motherTongue, leanCHYear, imei, imsi, schoolType, canview, 
+    organizationId, teacherstatus, payPass, classID, emailStatus, phoneStatus, loginIP, 
+    lastLoginTime, lastIP, terminalCode, token, modifyTime, license, iconUrl, readFinishNum, 
+    userStatus, userName, userId, createdtime, creatorid, status, remark, schoolName, 
+    learnChNum, unionid, accessId, zasBranchId, roletype, areacode, bindingNum, maxbindingNum, 
+    allbooks, starttime, endtime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.retech.nyscms.entity.FrontUserInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from front_user_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from front_user_info
+    where seqid = #{seqid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from front_user_info
+    where seqid = #{seqid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.retech.nyscms.entity.FrontUserInfoExample" >
+    delete from front_user_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" >
+    insert into front_user_info (seqid, phone, name, 
+      passwd, age, birthday, 
+      sex, email, address, 
+      interest, userType, country, 
+      countryName, motherTongue, leanCHYear, 
+      imei, imsi, schoolType, 
+      canview, organizationId, teacherstatus, 
+      payPass, classID, emailStatus, 
+      phoneStatus, loginIP, lastLoginTime, 
+      lastIP, terminalCode, token, 
+      modifyTime, license, iconUrl, 
+      readFinishNum, userStatus, userName, 
+      userId, createdtime, creatorid, 
+      status, remark, schoolName, 
+      learnChNum, unionid, accessId, 
+      zasBranchId, roletype, areacode, 
+      bindingNum, maxbindingNum, allbooks, 
+      starttime, endtime)
+    values (#{seqid,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{passwd,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, #{birthday,jdbcType=DATE}, 
+      #{sex,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{interest,jdbcType=VARCHAR}, #{usertype,jdbcType=INTEGER}, #{country,jdbcType=INTEGER}, 
+      #{countryname,jdbcType=VARCHAR}, #{mothertongue,jdbcType=VARCHAR}, #{leanchyear,jdbcType=INTEGER}, 
+      #{imei,jdbcType=VARCHAR}, #{imsi,jdbcType=VARCHAR}, #{schooltype,jdbcType=INTEGER}, 
+      #{canview,jdbcType=INTEGER}, #{organizationid,jdbcType=INTEGER}, #{teacherstatus,jdbcType=VARCHAR}, 
+      #{paypass,jdbcType=VARCHAR}, #{classid,jdbcType=INTEGER}, #{emailstatus,jdbcType=INTEGER}, 
+      #{phonestatus,jdbcType=INTEGER}, #{loginip,jdbcType=VARCHAR}, #{lastlogintime,jdbcType=TIMESTAMP}, 
+      #{lastip,jdbcType=VARCHAR}, #{terminalcode,jdbcType=VARCHAR}, #{token,jdbcType=VARCHAR}, 
+      #{modifytime,jdbcType=TIMESTAMP}, #{license,jdbcType=VARCHAR}, #{iconurl,jdbcType=VARCHAR}, 
+      #{readfinishnum,jdbcType=INTEGER}, #{userstatus,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{userid,jdbcType=INTEGER}, #{createdtime,jdbcType=TIMESTAMP}, #{creatorid,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{schoolname,jdbcType=VARCHAR}, 
+      #{learnchnum,jdbcType=INTEGER}, #{unionid,jdbcType=VARCHAR}, #{accessid,jdbcType=INTEGER}, 
+      #{zasbranchid,jdbcType=INTEGER}, #{roletype,jdbcType=INTEGER}, #{areacode,jdbcType=INTEGER}, 
+      #{bindingnum,jdbcType=INTEGER}, #{maxbindingnum,jdbcType=INTEGER}, #{allbooks,jdbcType=INTEGER}, 
+      #{starttime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" >
+    insert into front_user_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="seqid != null" >
+        seqid,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="passwd != null" >
+        passwd,
+      </if>
+      <if test="age != null" >
+        age,
+      </if>
+      <if test="birthday != null" >
+        birthday,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="interest != null" >
+        interest,
+      </if>
+      <if test="usertype != null" >
+        userType,
+      </if>
+      <if test="country != null" >
+        country,
+      </if>
+      <if test="countryname != null" >
+        countryName,
+      </if>
+      <if test="mothertongue != null" >
+        motherTongue,
+      </if>
+      <if test="leanchyear != null" >
+        leanCHYear,
+      </if>
+      <if test="imei != null" >
+        imei,
+      </if>
+      <if test="imsi != null" >
+        imsi,
+      </if>
+      <if test="schooltype != null" >
+        schoolType,
+      </if>
+      <if test="canview != null" >
+        canview,
+      </if>
+      <if test="organizationid != null" >
+        organizationId,
+      </if>
+      <if test="teacherstatus != null" >
+        teacherstatus,
+      </if>
+      <if test="paypass != null" >
+        payPass,
+      </if>
+      <if test="classid != null" >
+        classID,
+      </if>
+      <if test="emailstatus != null" >
+        emailStatus,
+      </if>
+      <if test="phonestatus != null" >
+        phoneStatus,
+      </if>
+      <if test="loginip != null" >
+        loginIP,
+      </if>
+      <if test="lastlogintime != null" >
+        lastLoginTime,
+      </if>
+      <if test="lastip != null" >
+        lastIP,
+      </if>
+      <if test="terminalcode != null" >
+        terminalCode,
+      </if>
+      <if test="token != null" >
+        token,
+      </if>
+      <if test="modifytime != null" >
+        modifyTime,
+      </if>
+      <if test="license != null" >
+        license,
+      </if>
+      <if test="iconurl != null" >
+        iconUrl,
+      </if>
+      <if test="readfinishnum != null" >
+        readFinishNum,
+      </if>
+      <if test="userstatus != null" >
+        userStatus,
+      </if>
+      <if test="username != null" >
+        userName,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="createdtime != null" >
+        createdtime,
+      </if>
+      <if test="creatorid != null" >
+        creatorid,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="schoolname != null" >
+        schoolName,
+      </if>
+      <if test="learnchnum != null" >
+        learnChNum,
+      </if>
+      <if test="unionid != null" >
+        unionid,
+      </if>
+      <if test="accessid != null" >
+        accessId,
+      </if>
+      <if test="zasbranchid != null" >
+        zasBranchId,
+      </if>
+      <if test="roletype != null" >
+        roletype,
+      </if>
+      <if test="areacode != null" >
+        areacode,
+      </if>
+      <if test="bindingnum != null" >
+        bindingNum,
+      </if>
+      <if test="maxbindingnum != null" >
+        maxbindingNum,
+      </if>
+      <if test="allbooks != null" >
+        allbooks,
+      </if>
+      <if test="starttime != null" >
+        starttime,
+      </if>
+      <if test="endtime != null" >
+        endtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="seqid != null" >
+        #{seqid,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="passwd != null" >
+        #{passwd,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=DATE},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="interest != null" >
+        #{interest,jdbcType=VARCHAR},
+      </if>
+      <if test="usertype != null" >
+        #{usertype,jdbcType=INTEGER},
+      </if>
+      <if test="country != null" >
+        #{country,jdbcType=INTEGER},
+      </if>
+      <if test="countryname != null" >
+        #{countryname,jdbcType=VARCHAR},
+      </if>
+      <if test="mothertongue != null" >
+        #{mothertongue,jdbcType=VARCHAR},
+      </if>
+      <if test="leanchyear != null" >
+        #{leanchyear,jdbcType=INTEGER},
+      </if>
+      <if test="imei != null" >
+        #{imei,jdbcType=VARCHAR},
+      </if>
+      <if test="imsi != null" >
+        #{imsi,jdbcType=VARCHAR},
+      </if>
+      <if test="schooltype != null" >
+        #{schooltype,jdbcType=INTEGER},
+      </if>
+      <if test="canview != null" >
+        #{canview,jdbcType=INTEGER},
+      </if>
+      <if test="organizationid != null" >
+        #{organizationid,jdbcType=INTEGER},
+      </if>
+      <if test="teacherstatus != null" >
+        #{teacherstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="paypass != null" >
+        #{paypass,jdbcType=VARCHAR},
+      </if>
+      <if test="classid != null" >
+        #{classid,jdbcType=INTEGER},
+      </if>
+      <if test="emailstatus != null" >
+        #{emailstatus,jdbcType=INTEGER},
+      </if>
+      <if test="phonestatus != null" >
+        #{phonestatus,jdbcType=INTEGER},
+      </if>
+      <if test="loginip != null" >
+        #{loginip,jdbcType=VARCHAR},
+      </if>
+      <if test="lastlogintime != null" >
+        #{lastlogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastip != null" >
+        #{lastip,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalcode != null" >
+        #{terminalcode,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null" >
+        #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="modifytime != null" >
+        #{modifytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="license != null" >
+        #{license,jdbcType=VARCHAR},
+      </if>
+      <if test="iconurl != null" >
+        #{iconurl,jdbcType=VARCHAR},
+      </if>
+      <if test="readfinishnum != null" >
+        #{readfinishnum,jdbcType=INTEGER},
+      </if>
+      <if test="userstatus != null" >
+        #{userstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        #{createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatorid != null" >
+        #{creatorid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolname != null" >
+        #{schoolname,jdbcType=VARCHAR},
+      </if>
+      <if test="learnchnum != null" >
+        #{learnchnum,jdbcType=INTEGER},
+      </if>
+      <if test="unionid != null" >
+        #{unionid,jdbcType=VARCHAR},
+      </if>
+      <if test="accessid != null" >
+        #{accessid,jdbcType=INTEGER},
+      </if>
+      <if test="zasbranchid != null" >
+        #{zasbranchid,jdbcType=INTEGER},
+      </if>
+      <if test="roletype != null" >
+        #{roletype,jdbcType=INTEGER},
+      </if>
+      <if test="areacode != null" >
+        #{areacode,jdbcType=INTEGER},
+      </if>
+      <if test="bindingnum != null" >
+        #{bindingnum,jdbcType=INTEGER},
+      </if>
+      <if test="maxbindingnum != null" >
+        #{maxbindingnum,jdbcType=INTEGER},
+      </if>
+      <if test="allbooks != null" >
+        #{allbooks,jdbcType=INTEGER},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.retech.nyscms.entity.FrontUserInfoExample" resultType="java.lang.Integer" >
+    select count(*) from front_user_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update front_user_info
+    <set >
+      <if test="record.seqid != null" >
+        seqid = #{record.seqid,jdbcType=INTEGER},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.passwd != null" >
+        passwd = #{record.passwd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.age != null" >
+        age = #{record.age,jdbcType=INTEGER},
+      </if>
+      <if test="record.birthday != null" >
+        birthday = #{record.birthday,jdbcType=DATE},
+      </if>
+      <if test="record.sex != null" >
+        sex = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.interest != null" >
+        interest = #{record.interest,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usertype != null" >
+        userType = #{record.usertype,jdbcType=INTEGER},
+      </if>
+      <if test="record.country != null" >
+        country = #{record.country,jdbcType=INTEGER},
+      </if>
+      <if test="record.countryname != null" >
+        countryName = #{record.countryname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mothertongue != null" >
+        motherTongue = #{record.mothertongue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.leanchyear != null" >
+        leanCHYear = #{record.leanchyear,jdbcType=INTEGER},
+      </if>
+      <if test="record.imei != null" >
+        imei = #{record.imei,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imsi != null" >
+        imsi = #{record.imsi,jdbcType=VARCHAR},
+      </if>
+      <if test="record.schooltype != null" >
+        schoolType = #{record.schooltype,jdbcType=INTEGER},
+      </if>
+      <if test="record.canview != null" >
+        canview = #{record.canview,jdbcType=INTEGER},
+      </if>
+      <if test="record.organizationid != null" >
+        organizationId = #{record.organizationid,jdbcType=INTEGER},
+      </if>
+      <if test="record.teacherstatus != null" >
+        teacherstatus = #{record.teacherstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paypass != null" >
+        payPass = #{record.paypass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classid != null" >
+        classID = #{record.classid,jdbcType=INTEGER},
+      </if>
+      <if test="record.emailstatus != null" >
+        emailStatus = #{record.emailstatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.phonestatus != null" >
+        phoneStatus = #{record.phonestatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.loginip != null" >
+        loginIP = #{record.loginip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastlogintime != null" >
+        lastLoginTime = #{record.lastlogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastip != null" >
+        lastIP = #{record.lastip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.terminalcode != null" >
+        terminalCode = #{record.terminalcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.token != null" >
+        token = #{record.token,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modifytime != null" >
+        modifyTime = #{record.modifytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.license != null" >
+        license = #{record.license,jdbcType=VARCHAR},
+      </if>
+      <if test="record.iconurl != null" >
+        iconUrl = #{record.iconurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.readfinishnum != null" >
+        readFinishNum = #{record.readfinishnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.userstatus != null" >
+        userStatus = #{record.userstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.username != null" >
+        userName = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userid != null" >
+        userId = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdtime != null" >
+        createdtime = #{record.createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.creatorid != null" >
+        creatorid = #{record.creatorid,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.schoolname != null" >
+        schoolName = #{record.schoolname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.learnchnum != null" >
+        learnChNum = #{record.learnchnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.unionid != null" >
+        unionid = #{record.unionid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accessid != null" >
+        accessId = #{record.accessid,jdbcType=INTEGER},
+      </if>
+      <if test="record.zasbranchid != null" >
+        zasBranchId = #{record.zasbranchid,jdbcType=INTEGER},
+      </if>
+      <if test="record.roletype != null" >
+        roletype = #{record.roletype,jdbcType=INTEGER},
+      </if>
+      <if test="record.areacode != null" >
+        areacode = #{record.areacode,jdbcType=INTEGER},
+      </if>
+      <if test="record.bindingnum != null" >
+        bindingNum = #{record.bindingnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.maxbindingnum != null" >
+        maxbindingNum = #{record.maxbindingnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.allbooks != null" >
+        allbooks = #{record.allbooks,jdbcType=INTEGER},
+      </if>
+      <if test="record.starttime != null" >
+        starttime = #{record.starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endtime != null" >
+        endtime = #{record.endtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update front_user_info
+    set seqid = #{record.seqid,jdbcType=INTEGER},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      passwd = #{record.passwd,jdbcType=VARCHAR},
+      age = #{record.age,jdbcType=INTEGER},
+      birthday = #{record.birthday,jdbcType=DATE},
+      sex = #{record.sex,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      interest = #{record.interest,jdbcType=VARCHAR},
+      userType = #{record.usertype,jdbcType=INTEGER},
+      country = #{record.country,jdbcType=INTEGER},
+      countryName = #{record.countryname,jdbcType=VARCHAR},
+      motherTongue = #{record.mothertongue,jdbcType=VARCHAR},
+      leanCHYear = #{record.leanchyear,jdbcType=INTEGER},
+      imei = #{record.imei,jdbcType=VARCHAR},
+      imsi = #{record.imsi,jdbcType=VARCHAR},
+      schoolType = #{record.schooltype,jdbcType=INTEGER},
+      canview = #{record.canview,jdbcType=INTEGER},
+      organizationId = #{record.organizationid,jdbcType=INTEGER},
+      teacherstatus = #{record.teacherstatus,jdbcType=VARCHAR},
+      payPass = #{record.paypass,jdbcType=VARCHAR},
+      classID = #{record.classid,jdbcType=INTEGER},
+      emailStatus = #{record.emailstatus,jdbcType=INTEGER},
+      phoneStatus = #{record.phonestatus,jdbcType=INTEGER},
+      loginIP = #{record.loginip,jdbcType=VARCHAR},
+      lastLoginTime = #{record.lastlogintime,jdbcType=TIMESTAMP},
+      lastIP = #{record.lastip,jdbcType=VARCHAR},
+      terminalCode = #{record.terminalcode,jdbcType=VARCHAR},
+      token = #{record.token,jdbcType=VARCHAR},
+      modifyTime = #{record.modifytime,jdbcType=TIMESTAMP},
+      license = #{record.license,jdbcType=VARCHAR},
+      iconUrl = #{record.iconurl,jdbcType=VARCHAR},
+      readFinishNum = #{record.readfinishnum,jdbcType=INTEGER},
+      userStatus = #{record.userstatus,jdbcType=VARCHAR},
+      userName = #{record.username,jdbcType=VARCHAR},
+      userId = #{record.userid,jdbcType=INTEGER},
+      createdtime = #{record.createdtime,jdbcType=TIMESTAMP},
+      creatorid = #{record.creatorid,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      schoolName = #{record.schoolname,jdbcType=VARCHAR},
+      learnChNum = #{record.learnchnum,jdbcType=INTEGER},
+      unionid = #{record.unionid,jdbcType=VARCHAR},
+      accessId = #{record.accessid,jdbcType=INTEGER},
+      zasBranchId = #{record.zasbranchid,jdbcType=INTEGER},
+      roletype = #{record.roletype,jdbcType=INTEGER},
+      areacode = #{record.areacode,jdbcType=INTEGER},
+      bindingNum = #{record.bindingnum,jdbcType=INTEGER},
+      maxbindingNum = #{record.maxbindingnum,jdbcType=INTEGER},
+      allbooks = #{record.allbooks,jdbcType=INTEGER},
+      starttime = #{record.starttime,jdbcType=TIMESTAMP},
+      endtime = #{record.endtime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" >
+    update front_user_info
+    <set >
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="passwd != null" >
+        passwd = #{passwd,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="birthday != null" >
+        birthday = #{birthday,jdbcType=DATE},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="interest != null" >
+        interest = #{interest,jdbcType=VARCHAR},
+      </if>
+      <if test="usertype != null" >
+        userType = #{usertype,jdbcType=INTEGER},
+      </if>
+      <if test="country != null" >
+        country = #{country,jdbcType=INTEGER},
+      </if>
+      <if test="countryname != null" >
+        countryName = #{countryname,jdbcType=VARCHAR},
+      </if>
+      <if test="mothertongue != null" >
+        motherTongue = #{mothertongue,jdbcType=VARCHAR},
+      </if>
+      <if test="leanchyear != null" >
+        leanCHYear = #{leanchyear,jdbcType=INTEGER},
+      </if>
+      <if test="imei != null" >
+        imei = #{imei,jdbcType=VARCHAR},
+      </if>
+      <if test="imsi != null" >
+        imsi = #{imsi,jdbcType=VARCHAR},
+      </if>
+      <if test="schooltype != null" >
+        schoolType = #{schooltype,jdbcType=INTEGER},
+      </if>
+      <if test="canview != null" >
+        canview = #{canview,jdbcType=INTEGER},
+      </if>
+      <if test="organizationid != null" >
+        organizationId = #{organizationid,jdbcType=INTEGER},
+      </if>
+      <if test="teacherstatus != null" >
+        teacherstatus = #{teacherstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="paypass != null" >
+        payPass = #{paypass,jdbcType=VARCHAR},
+      </if>
+      <if test="classid != null" >
+        classID = #{classid,jdbcType=INTEGER},
+      </if>
+      <if test="emailstatus != null" >
+        emailStatus = #{emailstatus,jdbcType=INTEGER},
+      </if>
+      <if test="phonestatus != null" >
+        phoneStatus = #{phonestatus,jdbcType=INTEGER},
+      </if>
+      <if test="loginip != null" >
+        loginIP = #{loginip,jdbcType=VARCHAR},
+      </if>
+      <if test="lastlogintime != null" >
+        lastLoginTime = #{lastlogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastip != null" >
+        lastIP = #{lastip,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalcode != null" >
+        terminalCode = #{terminalcode,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null" >
+        token = #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="modifytime != null" >
+        modifyTime = #{modifytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="license != null" >
+        license = #{license,jdbcType=VARCHAR},
+      </if>
+      <if test="iconurl != null" >
+        iconUrl = #{iconurl,jdbcType=VARCHAR},
+      </if>
+      <if test="readfinishnum != null" >
+        readFinishNum = #{readfinishnum,jdbcType=INTEGER},
+      </if>
+      <if test="userstatus != null" >
+        userStatus = #{userstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        userName = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        createdtime = #{createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatorid != null" >
+        creatorid = #{creatorid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolname != null" >
+        schoolName = #{schoolname,jdbcType=VARCHAR},
+      </if>
+      <if test="learnchnum != null" >
+        learnChNum = #{learnchnum,jdbcType=INTEGER},
+      </if>
+      <if test="unionid != null" >
+        unionid = #{unionid,jdbcType=VARCHAR},
+      </if>
+      <if test="accessid != null" >
+        accessId = #{accessid,jdbcType=INTEGER},
+      </if>
+      <if test="zasbranchid != null" >
+        zasBranchId = #{zasbranchid,jdbcType=INTEGER},
+      </if>
+      <if test="roletype != null" >
+        roletype = #{roletype,jdbcType=INTEGER},
+      </if>
+      <if test="areacode != null" >
+        areacode = #{areacode,jdbcType=INTEGER},
+      </if>
+      <if test="bindingnum != null" >
+        bindingNum = #{bindingnum,jdbcType=INTEGER},
+      </if>
+      <if test="maxbindingnum != null" >
+        maxbindingNum = #{maxbindingnum,jdbcType=INTEGER},
+      </if>
+      <if test="allbooks != null" >
+        allbooks = #{allbooks,jdbcType=INTEGER},
+      </if>
+      <if test="starttime != null" >
+        starttime = #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        endtime = #{endtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where seqid = #{seqid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" >
+    update front_user_info
+    set phone = #{phone,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      passwd = #{passwd,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      birthday = #{birthday,jdbcType=DATE},
+      sex = #{sex,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      interest = #{interest,jdbcType=VARCHAR},
+      userType = #{usertype,jdbcType=INTEGER},
+      country = #{country,jdbcType=INTEGER},
+      countryName = #{countryname,jdbcType=VARCHAR},
+      motherTongue = #{mothertongue,jdbcType=VARCHAR},
+      leanCHYear = #{leanchyear,jdbcType=INTEGER},
+      imei = #{imei,jdbcType=VARCHAR},
+      imsi = #{imsi,jdbcType=VARCHAR},
+      schoolType = #{schooltype,jdbcType=INTEGER},
+      canview = #{canview,jdbcType=INTEGER},
+      organizationId = #{organizationid,jdbcType=INTEGER},
+      teacherstatus = #{teacherstatus,jdbcType=VARCHAR},
+      payPass = #{paypass,jdbcType=VARCHAR},
+      classID = #{classid,jdbcType=INTEGER},
+      emailStatus = #{emailstatus,jdbcType=INTEGER},
+      phoneStatus = #{phonestatus,jdbcType=INTEGER},
+      loginIP = #{loginip,jdbcType=VARCHAR},
+      lastLoginTime = #{lastlogintime,jdbcType=TIMESTAMP},
+      lastIP = #{lastip,jdbcType=VARCHAR},
+      terminalCode = #{terminalcode,jdbcType=VARCHAR},
+      token = #{token,jdbcType=VARCHAR},
+      modifyTime = #{modifytime,jdbcType=TIMESTAMP},
+      license = #{license,jdbcType=VARCHAR},
+      iconUrl = #{iconurl,jdbcType=VARCHAR},
+      readFinishNum = #{readfinishnum,jdbcType=INTEGER},
+      userStatus = #{userstatus,jdbcType=VARCHAR},
+      userName = #{username,jdbcType=VARCHAR},
+      userId = #{userid,jdbcType=INTEGER},
+      createdtime = #{createdtime,jdbcType=TIMESTAMP},
+      creatorid = #{creatorid,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      schoolName = #{schoolname,jdbcType=VARCHAR},
+      learnChNum = #{learnchnum,jdbcType=INTEGER},
+      unionid = #{unionid,jdbcType=VARCHAR},
+      accessId = #{accessid,jdbcType=INTEGER},
+      zasBranchId = #{zasbranchid,jdbcType=INTEGER},
+      roletype = #{roletype,jdbcType=INTEGER},
+      areacode = #{areacode,jdbcType=INTEGER},
+      bindingNum = #{bindingnum,jdbcType=INTEGER},
+      maxbindingNum = #{maxbindingnum,jdbcType=INTEGER},
+      allbooks = #{allbooks,jdbcType=INTEGER},
+      starttime = #{starttime,jdbcType=TIMESTAMP},
+      endtime = #{endtime,jdbcType=TIMESTAMP}
+    where seqid = #{seqid,jdbcType=INTEGER}
+  </update>
+  
+  <!-- ### 以上代码由MBG + CommentPlugin自动生成, 生成时间: 2019-03-04 11:42:34 ### -->
+
+
+
+  <!-- Your codes goes here!!! -->
+  
+</mapper>

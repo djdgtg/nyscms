@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.retech.nyscms.mapper.FrontCommentMapper" >
+  <resultMap id="BaseResultMap" type="com.retech.nyscms.entity.FrontComment" >
+    <id column="seqid" property="seqid" jdbcType="INTEGER" />
+    
+    <!-- 用户id -->
+    <result column="userID" property="userid" jdbcType="INTEGER" />
+    
+    <!-- 图书id -->
+    <result column="eBookID" property="ebookid" jdbcType="INTEGER" />
+    
+    <!-- 图书评分 -->
+    <result column="bookscore" property="bookscore" jdbcType="INTEGER" />
+    
+    <!-- 订单id -->
+    <result column="orderID" property="orderid" jdbcType="VARCHAR" />
+    <result column="createdtime" property="createdtime" jdbcType="TIMESTAMP" />
+    <result column="creatorid" property="creatorid" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    
+    <!-- 订单详情id -->
+    <result column="orderdetailid" property="orderdetailid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    seqid, userID, eBookID, bookscore, orderID, createdtime, creatorid, status, orderdetailid
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.retech.nyscms.entity.FrontCommentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from front_comment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from front_comment
+    where seqid = #{seqid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from front_comment
+    where seqid = #{seqid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.retech.nyscms.entity.FrontCommentExample" >
+    delete from front_comment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" >
+    insert into front_comment (seqid, userID, eBookID, 
+      bookscore, orderID, createdtime, 
+      creatorid, status, orderdetailid
+      )
+    values (#{seqid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{ebookid,jdbcType=INTEGER}, 
+      #{bookscore,jdbcType=INTEGER}, #{orderid,jdbcType=VARCHAR}, #{createdtime,jdbcType=TIMESTAMP}, 
+      #{creatorid,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{orderdetailid,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" >
+    insert into front_comment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="seqid != null" >
+        seqid,
+      </if>
+      <if test="userid != null" >
+        userID,
+      </if>
+      <if test="ebookid != null" >
+        eBookID,
+      </if>
+      <if test="bookscore != null" >
+        bookscore,
+      </if>
+      <if test="orderid != null" >
+        orderID,
+      </if>
+      <if test="createdtime != null" >
+        createdtime,
+      </if>
+      <if test="creatorid != null" >
+        creatorid,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="orderdetailid != null" >
+        orderdetailid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="seqid != null" >
+        #{seqid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="ebookid != null" >
+        #{ebookid,jdbcType=INTEGER},
+      </if>
+      <if test="bookscore != null" >
+        #{bookscore,jdbcType=INTEGER},
+      </if>
+      <if test="orderid != null" >
+        #{orderid,jdbcType=VARCHAR},
+      </if>
+      <if test="createdtime != null" >
+        #{createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatorid != null" >
+        #{creatorid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="orderdetailid != null" >
+        #{orderdetailid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.retech.nyscms.entity.FrontCommentExample" resultType="java.lang.Integer" >
+    select count(*) from front_comment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update front_comment
+    <set >
+      <if test="record.seqid != null" >
+        seqid = #{record.seqid,jdbcType=INTEGER},
+      </if>
+      <if test="record.userid != null" >
+        userID = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.ebookid != null" >
+        eBookID = #{record.ebookid,jdbcType=INTEGER},
+      </if>
+      <if test="record.bookscore != null" >
+        bookscore = #{record.bookscore,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderid != null" >
+        orderID = #{record.orderid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdtime != null" >
+        createdtime = #{record.createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.creatorid != null" >
+        creatorid = #{record.creatorid,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderdetailid != null" >
+        orderdetailid = #{record.orderdetailid,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update front_comment
+    set seqid = #{record.seqid,jdbcType=INTEGER},
+      userID = #{record.userid,jdbcType=INTEGER},
+      eBookID = #{record.ebookid,jdbcType=INTEGER},
+      bookscore = #{record.bookscore,jdbcType=INTEGER},
+      orderID = #{record.orderid,jdbcType=VARCHAR},
+      createdtime = #{record.createdtime,jdbcType=TIMESTAMP},
+      creatorid = #{record.creatorid,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      orderdetailid = #{record.orderdetailid,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" >
+    update front_comment
+    <set >
+      <if test="userid != null" >
+        userID = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="ebookid != null" >
+        eBookID = #{ebookid,jdbcType=INTEGER},
+      </if>
+      <if test="bookscore != null" >
+        bookscore = #{bookscore,jdbcType=INTEGER},
+      </if>
+      <if test="orderid != null" >
+        orderID = #{orderid,jdbcType=VARCHAR},
+      </if>
+      <if test="createdtime != null" >
+        createdtime = #{createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatorid != null" >
+        creatorid = #{creatorid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="orderdetailid != null" >
+        orderdetailid = #{orderdetailid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where seqid = #{seqid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" >
+    update front_comment
+    set userID = #{userid,jdbcType=INTEGER},
+      eBookID = #{ebookid,jdbcType=INTEGER},
+      bookscore = #{bookscore,jdbcType=INTEGER},
+      orderID = #{orderid,jdbcType=VARCHAR},
+      createdtime = #{createdtime,jdbcType=TIMESTAMP},
+      creatorid = #{creatorid,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      orderdetailid = #{orderdetailid,jdbcType=INTEGER}
+    where seqid = #{seqid,jdbcType=INTEGER}
+  </update>
+  
+  <!-- ### 以上代码由MBG + CommentPlugin自动生成, 生成时间: 2019-03-04 11:42:34 ### -->
+
+
+
+  <!-- Your codes goes here!!! -->
+  
+</mapper>

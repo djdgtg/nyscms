@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.retech.nyscms.mapper.FrontUserBooksOwnedMapper" >
+  <resultMap id="BaseResultMap" type="com.retech.nyscms.entity.FrontUserBooksOwned" >
+    
+    <!-- 主键 -->
+    <id column="seqid" property="seqid" jdbcType="INTEGER" />
+    
+    <!-- 用户Id -->
+    <result column="userId" property="userid" jdbcType="INTEGER" />
+    
+    <!-- 书籍Id -->
+    <result column="eBookId" property="ebookid" jdbcType="INTEGER" />
+    
+    <!-- 系列Id -->
+    <result column="serialId" property="serialid" jdbcType="INTEGER" />
+    
+    <!-- 书籍来源：0购买，1租赁，2机构授权，3阅读卡 -->
+    <result column="type" property="type" jdbcType="INTEGER" />
+    
+    <!-- 购买/租阅的是    0/null：单本书，1：系列，2平台 3，专题 -->
+    <result column="buyType" property="buytype" jdbcType="INTEGER" />
+    
+    <!-- 开始时间 -->
+    <result column="startTime" property="starttime" jdbcType="TIMESTAMP" />
+    
+    <!-- 结束时间 -->
+    <result column="endTime" property="endtime" jdbcType="TIMESTAMP" />
+    
+    <!-- 机构Id -->
+    <result column="grantauthorityId" property="grantauthorityid" jdbcType="INTEGER" />
+    
+    <!-- 授权批次 -->
+    <result column="grantbatchId" property="grantbatchid" jdbcType="INTEGER" />
+    
+    <!-- 书籍状态 -->
+    <result column="bookstatus" property="bookstatus" jdbcType="INTEGER" />
+    <result column="createdtime" property="createdtime" jdbcType="TIMESTAMP" />
+    <result column="creatorid" property="creatorid" jdbcType="INTEGER" />
+    
+    <!-- 1:正常可以看，0:授权过期或租阅时间过期 -->
+    <result column="status" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    seqid, userId, eBookId, serialId, type, buyType, startTime, endTime, grantauthorityId, 
+    grantbatchId, bookstatus, createdtime, creatorid, status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.retech.nyscms.entity.FrontUserBooksOwnedExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from front_user_books_owned
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from front_user_books_owned
+    where seqid = #{seqid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from front_user_books_owned
+    where seqid = #{seqid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.retech.nyscms.entity.FrontUserBooksOwnedExample" >
+    delete from front_user_books_owned
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" >
+    insert into front_user_books_owned (seqid, userId, eBookId, 
+      serialId, type, buyType, 
+      startTime, endTime, grantauthorityId, 
+      grantbatchId, bookstatus, createdtime, 
+      creatorid, status)
+    values (#{seqid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{ebookid,jdbcType=INTEGER}, 
+      #{serialid,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{buytype,jdbcType=INTEGER}, 
+      #{starttime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP}, #{grantauthorityid,jdbcType=INTEGER}, 
+      #{grantbatchid,jdbcType=INTEGER}, #{bookstatus,jdbcType=INTEGER}, #{createdtime,jdbcType=TIMESTAMP}, 
+      #{creatorid,jdbcType=INTEGER}, #{status,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" >
+    insert into front_user_books_owned
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="seqid != null" >
+        seqid,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="ebookid != null" >
+        eBookId,
+      </if>
+      <if test="serialid != null" >
+        serialId,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="buytype != null" >
+        buyType,
+      </if>
+      <if test="starttime != null" >
+        startTime,
+      </if>
+      <if test="endtime != null" >
+        endTime,
+      </if>
+      <if test="grantauthorityid != null" >
+        grantauthorityId,
+      </if>
+      <if test="grantbatchid != null" >
+        grantbatchId,
+      </if>
+      <if test="bookstatus != null" >
+        bookstatus,
+      </if>
+      <if test="createdtime != null" >
+        createdtime,
+      </if>
+      <if test="creatorid != null" >
+        creatorid,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="seqid != null" >
+        #{seqid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="ebookid != null" >
+        #{ebookid,jdbcType=INTEGER},
+      </if>
+      <if test="serialid != null" >
+        #{serialid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="buytype != null" >
+        #{buytype,jdbcType=INTEGER},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="grantauthorityid != null" >
+        #{grantauthorityid,jdbcType=INTEGER},
+      </if>
+      <if test="grantbatchid != null" >
+        #{grantbatchid,jdbcType=INTEGER},
+      </if>
+      <if test="bookstatus != null" >
+        #{bookstatus,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        #{createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatorid != null" >
+        #{creatorid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.retech.nyscms.entity.FrontUserBooksOwnedExample" resultType="java.lang.Integer" >
+    select count(*) from front_user_books_owned
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update front_user_books_owned
+    <set >
+      <if test="record.seqid != null" >
+        seqid = #{record.seqid,jdbcType=INTEGER},
+      </if>
+      <if test="record.userid != null" >
+        userId = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.ebookid != null" >
+        eBookId = #{record.ebookid,jdbcType=INTEGER},
+      </if>
+      <if test="record.serialid != null" >
+        serialId = #{record.serialid,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.buytype != null" >
+        buyType = #{record.buytype,jdbcType=INTEGER},
+      </if>
+      <if test="record.starttime != null" >
+        startTime = #{record.starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endtime != null" >
+        endTime = #{record.endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.grantauthorityid != null" >
+        grantauthorityId = #{record.grantauthorityid,jdbcType=INTEGER},
+      </if>
+      <if test="record.grantbatchid != null" >
+        grantbatchId = #{record.grantbatchid,jdbcType=INTEGER},
+      </if>
+      <if test="record.bookstatus != null" >
+        bookstatus = #{record.bookstatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdtime != null" >
+        createdtime = #{record.createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.creatorid != null" >
+        creatorid = #{record.creatorid,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update front_user_books_owned
+    set seqid = #{record.seqid,jdbcType=INTEGER},
+      userId = #{record.userid,jdbcType=INTEGER},
+      eBookId = #{record.ebookid,jdbcType=INTEGER},
+      serialId = #{record.serialid,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=INTEGER},
+      buyType = #{record.buytype,jdbcType=INTEGER},
+      startTime = #{record.starttime,jdbcType=TIMESTAMP},
+      endTime = #{record.endtime,jdbcType=TIMESTAMP},
+      grantauthorityId = #{record.grantauthorityid,jdbcType=INTEGER},
+      grantbatchId = #{record.grantbatchid,jdbcType=INTEGER},
+      bookstatus = #{record.bookstatus,jdbcType=INTEGER},
+      createdtime = #{record.createdtime,jdbcType=TIMESTAMP},
+      creatorid = #{record.creatorid,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" >
+    update front_user_books_owned
+    <set >
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="ebookid != null" >
+        eBookId = #{ebookid,jdbcType=INTEGER},
+      </if>
+      <if test="serialid != null" >
+        serialId = #{serialid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="buytype != null" >
+        buyType = #{buytype,jdbcType=INTEGER},
+      </if>
+      <if test="starttime != null" >
+        startTime = #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        endTime = #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="grantauthorityid != null" >
+        grantauthorityId = #{grantauthorityid,jdbcType=INTEGER},
+      </if>
+      <if test="grantbatchid != null" >
+        grantbatchId = #{grantbatchid,jdbcType=INTEGER},
+      </if>
+      <if test="bookstatus != null" >
+        bookstatus = #{bookstatus,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        createdtime = #{createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatorid != null" >
+        creatorid = #{creatorid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where seqid = #{seqid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" >
+    update front_user_books_owned
+    set userId = #{userid,jdbcType=INTEGER},
+      eBookId = #{ebookid,jdbcType=INTEGER},
+      serialId = #{serialid,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      buyType = #{buytype,jdbcType=INTEGER},
+      startTime = #{starttime,jdbcType=TIMESTAMP},
+      endTime = #{endtime,jdbcType=TIMESTAMP},
+      grantauthorityId = #{grantauthorityid,jdbcType=INTEGER},
+      grantbatchId = #{grantbatchid,jdbcType=INTEGER},
+      bookstatus = #{bookstatus,jdbcType=INTEGER},
+      createdtime = #{createdtime,jdbcType=TIMESTAMP},
+      creatorid = #{creatorid,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER}
+    where seqid = #{seqid,jdbcType=INTEGER}
+  </update>
+  
+  <!-- ### 以上代码由MBG + CommentPlugin自动生成, 生成时间: 2019-03-04 11:42:34 ### -->
+
+
+
+  <!-- Your codes goes here!!! -->
+  
+</mapper>

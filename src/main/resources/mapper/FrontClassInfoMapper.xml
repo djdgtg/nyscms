@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.retech.nyscms.mapper.FrontClassInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.retech.nyscms.entity.FrontClassInfo" >
+    <id column="classID" property="classid" jdbcType="INTEGER" />
+    
+    <!-- 班级名字 -->
+    <result column="className" property="classname" jdbcType="VARCHAR" />
+    
+    <!-- 学生数量 -->
+    <result column="studentNum" property="studentnum" jdbcType="INTEGER" />
+    
+    <!-- 学校名字 -->
+    <result column="schoolName" property="schoolname" jdbcType="VARCHAR" />
+    
+    <!-- 学校地址 -->
+    <result column="schoolAddress" property="schooladdress" jdbcType="VARCHAR" />
+    
+    <!-- 创建时间 -->
+    <result column="createdTime" property="createdtime" jdbcType="TIMESTAMP" />
+    
+    <!-- 创建人ID（机构Id） -->
+    <result column="createrID" property="createrid" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    
+    <!-- 老师id -->
+    <result column="teacherId" property="teacherid" jdbcType="INTEGER" />
+    
+    <!-- 头像地址 -->
+    <result column="iconUrl" property="iconurl" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.retech.nyscms.entity.FrontClassInfo" extends="BaseResultMap" >
+    
+    <!-- 班级概况 -->
+    <result column="introduce" property="introduce" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    classID, className, studentNum, schoolName, schoolAddress, createdTime, createrID, 
+    status, teacherId, iconUrl
+  </sql>
+  <sql id="Blob_Column_List" >
+    introduce
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.retech.nyscms.entity.FrontClassInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from front_class_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.retech.nyscms.entity.FrontClassInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from front_class_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from front_class_info
+    where classID = #{classid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from front_class_info
+    where classID = #{classid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.retech.nyscms.entity.FrontClassInfoExample" >
+    delete from front_class_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" >
+    insert into front_class_info (classID, className, studentNum, 
+      schoolName, schoolAddress, createdTime, 
+      createrID, status, teacherId, 
+      iconUrl, introduce)
+    values (#{classid,jdbcType=INTEGER}, #{classname,jdbcType=VARCHAR}, #{studentnum,jdbcType=INTEGER}, 
+      #{schoolname,jdbcType=VARCHAR}, #{schooladdress,jdbcType=VARCHAR}, #{createdtime,jdbcType=TIMESTAMP}, 
+      #{createrid,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{teacherid,jdbcType=INTEGER}, 
+      #{iconurl,jdbcType=VARCHAR}, #{introduce,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" >
+    insert into front_class_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="classid != null" >
+        classID,
+      </if>
+      <if test="classname != null" >
+        className,
+      </if>
+      <if test="studentnum != null" >
+        studentNum,
+      </if>
+      <if test="schoolname != null" >
+        schoolName,
+      </if>
+      <if test="schooladdress != null" >
+        schoolAddress,
+      </if>
+      <if test="createdtime != null" >
+        createdTime,
+      </if>
+      <if test="createrid != null" >
+        createrID,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="teacherid != null" >
+        teacherId,
+      </if>
+      <if test="iconurl != null" >
+        iconUrl,
+      </if>
+      <if test="introduce != null" >
+        introduce,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="classid != null" >
+        #{classid,jdbcType=INTEGER},
+      </if>
+      <if test="classname != null" >
+        #{classname,jdbcType=VARCHAR},
+      </if>
+      <if test="studentnum != null" >
+        #{studentnum,jdbcType=INTEGER},
+      </if>
+      <if test="schoolname != null" >
+        #{schoolname,jdbcType=VARCHAR},
+      </if>
+      <if test="schooladdress != null" >
+        #{schooladdress,jdbcType=VARCHAR},
+      </if>
+      <if test="createdtime != null" >
+        #{createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createrid != null" >
+        #{createrid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="teacherid != null" >
+        #{teacherid,jdbcType=INTEGER},
+      </if>
+      <if test="iconurl != null" >
+        #{iconurl,jdbcType=VARCHAR},
+      </if>
+      <if test="introduce != null" >
+        #{introduce,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.retech.nyscms.entity.FrontClassInfoExample" resultType="java.lang.Integer" >
+    select count(*) from front_class_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update front_class_info
+    <set >
+      <if test="record.classid != null" >
+        classID = #{record.classid,jdbcType=INTEGER},
+      </if>
+      <if test="record.classname != null" >
+        className = #{record.classname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studentnum != null" >
+        studentNum = #{record.studentnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.schoolname != null" >
+        schoolName = #{record.schoolname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.schooladdress != null" >
+        schoolAddress = #{record.schooladdress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdtime != null" >
+        createdTime = #{record.createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createrid != null" >
+        createrID = #{record.createrid,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.teacherid != null" >
+        teacherId = #{record.teacherid,jdbcType=INTEGER},
+      </if>
+      <if test="record.iconurl != null" >
+        iconUrl = #{record.iconurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.introduce != null" >
+        introduce = #{record.introduce,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update front_class_info
+    set classID = #{record.classid,jdbcType=INTEGER},
+      className = #{record.classname,jdbcType=VARCHAR},
+      studentNum = #{record.studentnum,jdbcType=INTEGER},
+      schoolName = #{record.schoolname,jdbcType=VARCHAR},
+      schoolAddress = #{record.schooladdress,jdbcType=VARCHAR},
+      createdTime = #{record.createdtime,jdbcType=TIMESTAMP},
+      createrID = #{record.createrid,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      teacherId = #{record.teacherid,jdbcType=INTEGER},
+      iconUrl = #{record.iconurl,jdbcType=VARCHAR},
+      introduce = #{record.introduce,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update front_class_info
+    set classID = #{record.classid,jdbcType=INTEGER},
+      className = #{record.classname,jdbcType=VARCHAR},
+      studentNum = #{record.studentnum,jdbcType=INTEGER},
+      schoolName = #{record.schoolname,jdbcType=VARCHAR},
+      schoolAddress = #{record.schooladdress,jdbcType=VARCHAR},
+      createdTime = #{record.createdtime,jdbcType=TIMESTAMP},
+      createrID = #{record.createrid,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      teacherId = #{record.teacherid,jdbcType=INTEGER},
+      iconUrl = #{record.iconurl,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" >
+    update front_class_info
+    <set >
+      <if test="classname != null" >
+        className = #{classname,jdbcType=VARCHAR},
+      </if>
+      <if test="studentnum != null" >
+        studentNum = #{studentnum,jdbcType=INTEGER},
+      </if>
+      <if test="schoolname != null" >
+        schoolName = #{schoolname,jdbcType=VARCHAR},
+      </if>
+      <if test="schooladdress != null" >
+        schoolAddress = #{schooladdress,jdbcType=VARCHAR},
+      </if>
+      <if test="createdtime != null" >
+        createdTime = #{createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createrid != null" >
+        createrID = #{createrid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="teacherid != null" >
+        teacherId = #{teacherid,jdbcType=INTEGER},
+      </if>
+      <if test="iconurl != null" >
+        iconUrl = #{iconurl,jdbcType=VARCHAR},
+      </if>
+      <if test="introduce != null" >
+        introduce = #{introduce,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where classID = #{classid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" >
+    update front_class_info
+    set className = #{classname,jdbcType=VARCHAR},
+      studentNum = #{studentnum,jdbcType=INTEGER},
+      schoolName = #{schoolname,jdbcType=VARCHAR},
+      schoolAddress = #{schooladdress,jdbcType=VARCHAR},
+      createdTime = #{createdtime,jdbcType=TIMESTAMP},
+      createrID = #{createrid,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      teacherId = #{teacherid,jdbcType=INTEGER},
+      iconUrl = #{iconurl,jdbcType=VARCHAR},
+      introduce = #{introduce,jdbcType=LONGVARCHAR}
+    where classID = #{classid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" >
+    update front_class_info
+    set className = #{classname,jdbcType=VARCHAR},
+      studentNum = #{studentnum,jdbcType=INTEGER},
+      schoolName = #{schoolname,jdbcType=VARCHAR},
+      schoolAddress = #{schooladdress,jdbcType=VARCHAR},
+      createdTime = #{createdtime,jdbcType=TIMESTAMP},
+      createrID = #{createrid,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      teacherId = #{teacherid,jdbcType=INTEGER},
+      iconUrl = #{iconurl,jdbcType=VARCHAR}
+    where classID = #{classid,jdbcType=INTEGER}
+  </update>
+  
+  <!-- ### 以上代码由MBG + CommentPlugin自动生成, 生成时间: 2019-03-04 11:42:34 ### -->
+
+
+
+  <!-- Your codes goes here!!! -->
+  
+</mapper>

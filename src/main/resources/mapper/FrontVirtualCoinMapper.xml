@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.retech.nyscms.mapper.FrontVirtualCoinMapper" >
+  <resultMap id="BaseResultMap" type="com.retech.nyscms.entity.FrontVirtualCoin" >
+    
+    <!-- 主键 -->
+    <id column="seqid" property="seqid" jdbcType="INTEGER" />
+    
+    <!-- 充值名称 -->
+    <result column="virtualcoinType" property="virtualcointype" jdbcType="VARCHAR" />
+    
+    <!-- 虚拟币金额 -->
+    <result column="virtualcoinSum" property="virtualcoinsum" jdbcType="REAL" />
+    
+    <!-- 赠送虚拟币金额 -->
+    <result column="presenterSum" property="presentersum" jdbcType="REAL" />
+    
+    <!-- 国内人名币 -->
+    <result column="domesticPrice" property="domesticprice" jdbcType="REAL" />
+    
+    <!-- 国外人名币 -->
+    <result column="foreignPrice" property="foreignprice" jdbcType="REAL" />
+    
+    <!-- 国内美元 -->
+    <result column="domesticDollar" property="domesticdollar" jdbcType="REAL" />
+    
+    <!-- 国外美元 -->
+    <result column="foreignDollar" property="foreigndollar" jdbcType="REAL" />
+    
+    <!-- 是否是苹果支付 -->
+    <result column="isApplePay" property="isapplepay" jdbcType="INTEGER" />
+    
+    <!-- 创建时间 -->
+    <result column="createdtime" property="createdtime" jdbcType="TIMESTAMP" />
+    <result column="creatorid" property="creatorid" jdbcType="INTEGER" />
+    
+    <!-- 状态 -->
+    <result column="status" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    seqid, virtualcoinType, virtualcoinSum, presenterSum, domesticPrice, foreignPrice, 
+    domesticDollar, foreignDollar, isApplePay, createdtime, creatorid, status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.retech.nyscms.entity.FrontVirtualCoinExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from front_virtual_coin
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from front_virtual_coin
+    where seqid = #{seqid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from front_virtual_coin
+    where seqid = #{seqid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.retech.nyscms.entity.FrontVirtualCoinExample" >
+    delete from front_virtual_coin
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" >
+    insert into front_virtual_coin (seqid, virtualcoinType, virtualcoinSum, 
+      presenterSum, domesticPrice, foreignPrice, 
+      domesticDollar, foreignDollar, isApplePay, 
+      createdtime, creatorid, status
+      )
+    values (#{seqid,jdbcType=INTEGER}, #{virtualcointype,jdbcType=VARCHAR}, #{virtualcoinsum,jdbcType=REAL}, 
+      #{presentersum,jdbcType=REAL}, #{domesticprice,jdbcType=REAL}, #{foreignprice,jdbcType=REAL}, 
+      #{domesticdollar,jdbcType=REAL}, #{foreigndollar,jdbcType=REAL}, #{isapplepay,jdbcType=INTEGER}, 
+      #{createdtime,jdbcType=TIMESTAMP}, #{creatorid,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" >
+    insert into front_virtual_coin
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="seqid != null" >
+        seqid,
+      </if>
+      <if test="virtualcointype != null" >
+        virtualcoinType,
+      </if>
+      <if test="virtualcoinsum != null" >
+        virtualcoinSum,
+      </if>
+      <if test="presentersum != null" >
+        presenterSum,
+      </if>
+      <if test="domesticprice != null" >
+        domesticPrice,
+      </if>
+      <if test="foreignprice != null" >
+        foreignPrice,
+      </if>
+      <if test="domesticdollar != null" >
+        domesticDollar,
+      </if>
+      <if test="foreigndollar != null" >
+        foreignDollar,
+      </if>
+      <if test="isapplepay != null" >
+        isApplePay,
+      </if>
+      <if test="createdtime != null" >
+        createdtime,
+      </if>
+      <if test="creatorid != null" >
+        creatorid,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="seqid != null" >
+        #{seqid,jdbcType=INTEGER},
+      </if>
+      <if test="virtualcointype != null" >
+        #{virtualcointype,jdbcType=VARCHAR},
+      </if>
+      <if test="virtualcoinsum != null" >
+        #{virtualcoinsum,jdbcType=REAL},
+      </if>
+      <if test="presentersum != null" >
+        #{presentersum,jdbcType=REAL},
+      </if>
+      <if test="domesticprice != null" >
+        #{domesticprice,jdbcType=REAL},
+      </if>
+      <if test="foreignprice != null" >
+        #{foreignprice,jdbcType=REAL},
+      </if>
+      <if test="domesticdollar != null" >
+        #{domesticdollar,jdbcType=REAL},
+      </if>
+      <if test="foreigndollar != null" >
+        #{foreigndollar,jdbcType=REAL},
+      </if>
+      <if test="isapplepay != null" >
+        #{isapplepay,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        #{createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatorid != null" >
+        #{creatorid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.retech.nyscms.entity.FrontVirtualCoinExample" resultType="java.lang.Integer" >
+    select count(*) from front_virtual_coin
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update front_virtual_coin
+    <set >
+      <if test="record.seqid != null" >
+        seqid = #{record.seqid,jdbcType=INTEGER},
+      </if>
+      <if test="record.virtualcointype != null" >
+        virtualcoinType = #{record.virtualcointype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.virtualcoinsum != null" >
+        virtualcoinSum = #{record.virtualcoinsum,jdbcType=REAL},
+      </if>
+      <if test="record.presentersum != null" >
+        presenterSum = #{record.presentersum,jdbcType=REAL},
+      </if>
+      <if test="record.domesticprice != null" >
+        domesticPrice = #{record.domesticprice,jdbcType=REAL},
+      </if>
+      <if test="record.foreignprice != null" >
+        foreignPrice = #{record.foreignprice,jdbcType=REAL},
+      </if>
+      <if test="record.domesticdollar != null" >
+        domesticDollar = #{record.domesticdollar,jdbcType=REAL},
+      </if>
+      <if test="record.foreigndollar != null" >
+        foreignDollar = #{record.foreigndollar,jdbcType=REAL},
+      </if>
+      <if test="record.isapplepay != null" >
+        isApplePay = #{record.isapplepay,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdtime != null" >
+        createdtime = #{record.createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.creatorid != null" >
+        creatorid = #{record.creatorid,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update front_virtual_coin
+    set seqid = #{record.seqid,jdbcType=INTEGER},
+      virtualcoinType = #{record.virtualcointype,jdbcType=VARCHAR},
+      virtualcoinSum = #{record.virtualcoinsum,jdbcType=REAL},
+      presenterSum = #{record.presentersum,jdbcType=REAL},
+      domesticPrice = #{record.domesticprice,jdbcType=REAL},
+      foreignPrice = #{record.foreignprice,jdbcType=REAL},
+      domesticDollar = #{record.domesticdollar,jdbcType=REAL},
+      foreignDollar = #{record.foreigndollar,jdbcType=REAL},
+      isApplePay = #{record.isapplepay,jdbcType=INTEGER},
+      createdtime = #{record.createdtime,jdbcType=TIMESTAMP},
+      creatorid = #{record.creatorid,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" >
+    update front_virtual_coin
+    <set >
+      <if test="virtualcointype != null" >
+        virtualcoinType = #{virtualcointype,jdbcType=VARCHAR},
+      </if>
+      <if test="virtualcoinsum != null" >
+        virtualcoinSum = #{virtualcoinsum,jdbcType=REAL},
+      </if>
+      <if test="presentersum != null" >
+        presenterSum = #{presentersum,jdbcType=REAL},
+      </if>
+      <if test="domesticprice != null" >
+        domesticPrice = #{domesticprice,jdbcType=REAL},
+      </if>
+      <if test="foreignprice != null" >
+        foreignPrice = #{foreignprice,jdbcType=REAL},
+      </if>
+      <if test="domesticdollar != null" >
+        domesticDollar = #{domesticdollar,jdbcType=REAL},
+      </if>
+      <if test="foreigndollar != null" >
+        foreignDollar = #{foreigndollar,jdbcType=REAL},
+      </if>
+      <if test="isapplepay != null" >
+        isApplePay = #{isapplepay,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        createdtime = #{createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatorid != null" >
+        creatorid = #{creatorid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where seqid = #{seqid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" >
+    update front_virtual_coin
+    set virtualcoinType = #{virtualcointype,jdbcType=VARCHAR},
+      virtualcoinSum = #{virtualcoinsum,jdbcType=REAL},
+      presenterSum = #{presentersum,jdbcType=REAL},
+      domesticPrice = #{domesticprice,jdbcType=REAL},
+      foreignPrice = #{foreignprice,jdbcType=REAL},
+      domesticDollar = #{domesticdollar,jdbcType=REAL},
+      foreignDollar = #{foreigndollar,jdbcType=REAL},
+      isApplePay = #{isapplepay,jdbcType=INTEGER},
+      createdtime = #{createdtime,jdbcType=TIMESTAMP},
+      creatorid = #{creatorid,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER}
+    where seqid = #{seqid,jdbcType=INTEGER}
+  </update>
+  
+  <!-- ### 以上代码由MBG + CommentPlugin自动生成, 生成时间: 2019-03-04 11:42:34 ### -->
+
+
+
+  <!-- Your codes goes here!!! -->
+  
+</mapper>

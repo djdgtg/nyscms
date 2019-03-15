@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.retech.nyscms.mapper.FrontRechargeMapper" >
+  <resultMap id="BaseResultMap" type="com.retech.nyscms.entity.FrontRecharge" >
+    
+    <!-- 主键 -->
+    <id column="seqid" property="seqid" jdbcType="INTEGER" />
+    
+    <!-- 充值类型 -->
+    <result column="rechargeType" property="rechargetype" jdbcType="INTEGER" />
+    
+    <!-- 充值卡号 -->
+    <result column="rechargeNum" property="rechargenum" jdbcType="VARCHAR" />
+    
+    <!-- 充值卡密 -->
+    <result column="rechargecode" property="rechargecode" jdbcType="VARCHAR" />
+    
+    <!-- 激活期限截止日期 -->
+    <result column="endtime" property="endtime" jdbcType="TIMESTAMP" />
+    
+    <!-- 激活状态：1激活，0未激活，2已失效 -->
+    <result column="activeStatus" property="activestatus" jdbcType="INTEGER" />
+    
+    <!-- 激活人 -->
+    <result column="activateuser" property="activateuser" jdbcType="INTEGER" />
+    <result column="createdtime" property="createdtime" jdbcType="TIMESTAMP" />
+    <result column="creatorid" property="creatorid" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    seqid, rechargeType, rechargeNum, rechargecode, endtime, activeStatus, activateuser, 
+    createdtime, creatorid, status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.retech.nyscms.entity.FrontRechargeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from front_recharge
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from front_recharge
+    where seqid = #{seqid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from front_recharge
+    where seqid = #{seqid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.retech.nyscms.entity.FrontRechargeExample" >
+    delete from front_recharge
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" >
+    insert into front_recharge (seqid, rechargeType, rechargeNum, 
+      rechargecode, endtime, activeStatus, 
+      activateuser, createdtime, creatorid, 
+      status)
+    values (#{seqid,jdbcType=INTEGER}, #{rechargetype,jdbcType=INTEGER}, #{rechargenum,jdbcType=VARCHAR}, 
+      #{rechargecode,jdbcType=VARCHAR}, #{endtime,jdbcType=TIMESTAMP}, #{activestatus,jdbcType=INTEGER}, 
+      #{activateuser,jdbcType=INTEGER}, #{createdtime,jdbcType=TIMESTAMP}, #{creatorid,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" >
+    insert into front_recharge
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="seqid != null" >
+        seqid,
+      </if>
+      <if test="rechargetype != null" >
+        rechargeType,
+      </if>
+      <if test="rechargenum != null" >
+        rechargeNum,
+      </if>
+      <if test="rechargecode != null" >
+        rechargecode,
+      </if>
+      <if test="endtime != null" >
+        endtime,
+      </if>
+      <if test="activestatus != null" >
+        activeStatus,
+      </if>
+      <if test="activateuser != null" >
+        activateuser,
+      </if>
+      <if test="createdtime != null" >
+        createdtime,
+      </if>
+      <if test="creatorid != null" >
+        creatorid,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="seqid != null" >
+        #{seqid,jdbcType=INTEGER},
+      </if>
+      <if test="rechargetype != null" >
+        #{rechargetype,jdbcType=INTEGER},
+      </if>
+      <if test="rechargenum != null" >
+        #{rechargenum,jdbcType=VARCHAR},
+      </if>
+      <if test="rechargecode != null" >
+        #{rechargecode,jdbcType=VARCHAR},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activestatus != null" >
+        #{activestatus,jdbcType=INTEGER},
+      </if>
+      <if test="activateuser != null" >
+        #{activateuser,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        #{createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatorid != null" >
+        #{creatorid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.retech.nyscms.entity.FrontRechargeExample" resultType="java.lang.Integer" >
+    select count(*) from front_recharge
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update front_recharge
+    <set >
+      <if test="record.seqid != null" >
+        seqid = #{record.seqid,jdbcType=INTEGER},
+      </if>
+      <if test="record.rechargetype != null" >
+        rechargeType = #{record.rechargetype,jdbcType=INTEGER},
+      </if>
+      <if test="record.rechargenum != null" >
+        rechargeNum = #{record.rechargenum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rechargecode != null" >
+        rechargecode = #{record.rechargecode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endtime != null" >
+        endtime = #{record.endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.activestatus != null" >
+        activeStatus = #{record.activestatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.activateuser != null" >
+        activateuser = #{record.activateuser,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdtime != null" >
+        createdtime = #{record.createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.creatorid != null" >
+        creatorid = #{record.creatorid,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update front_recharge
+    set seqid = #{record.seqid,jdbcType=INTEGER},
+      rechargeType = #{record.rechargetype,jdbcType=INTEGER},
+      rechargeNum = #{record.rechargenum,jdbcType=VARCHAR},
+      rechargecode = #{record.rechargecode,jdbcType=VARCHAR},
+      endtime = #{record.endtime,jdbcType=TIMESTAMP},
+      activeStatus = #{record.activestatus,jdbcType=INTEGER},
+      activateuser = #{record.activateuser,jdbcType=INTEGER},
+      createdtime = #{record.createdtime,jdbcType=TIMESTAMP},
+      creatorid = #{record.creatorid,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" >
+    update front_recharge
+    <set >
+      <if test="rechargetype != null" >
+        rechargeType = #{rechargetype,jdbcType=INTEGER},
+      </if>
+      <if test="rechargenum != null" >
+        rechargeNum = #{rechargenum,jdbcType=VARCHAR},
+      </if>
+      <if test="rechargecode != null" >
+        rechargecode = #{rechargecode,jdbcType=VARCHAR},
+      </if>
+      <if test="endtime != null" >
+        endtime = #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activestatus != null" >
+        activeStatus = #{activestatus,jdbcType=INTEGER},
+      </if>
+      <if test="activateuser != null" >
+        activateuser = #{activateuser,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        createdtime = #{createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatorid != null" >
+        creatorid = #{creatorid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where seqid = #{seqid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" >
+    update front_recharge
+    set rechargeType = #{rechargetype,jdbcType=INTEGER},
+      rechargeNum = #{rechargenum,jdbcType=VARCHAR},
+      rechargecode = #{rechargecode,jdbcType=VARCHAR},
+      endtime = #{endtime,jdbcType=TIMESTAMP},
+      activeStatus = #{activestatus,jdbcType=INTEGER},
+      activateuser = #{activateuser,jdbcType=INTEGER},
+      createdtime = #{createdtime,jdbcType=TIMESTAMP},
+      creatorid = #{creatorid,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER}
+    where seqid = #{seqid,jdbcType=INTEGER}
+  </update>
+  
+  <!-- ### 以上代码由MBG + CommentPlugin自动生成, 生成时间: 2019-03-04 11:42:34 ### -->
+
+
+
+  <!-- Your codes goes here!!! -->
+  
+</mapper>

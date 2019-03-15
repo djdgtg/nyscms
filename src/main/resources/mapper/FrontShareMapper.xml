@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.retech.nyscms.mapper.FrontShareMapper" >
+  <resultMap id="BaseResultMap" type="com.retech.nyscms.entity.FrontShare" >
+    
+    <!-- 主键 -->
+    <id column="shareID" property="shareid" jdbcType="INTEGER" />
+    
+    <!-- 分享标题 -->
+    <result column="shareTitle" property="sharetitle" jdbcType="VARCHAR" />
+    
+    <!-- 书籍Id -->
+    <result column="eBookID" property="ebookid" jdbcType="INTEGER" />
+    
+    <!-- 用户Id -->
+    <result column="userID" property="userid" jdbcType="INTEGER" />
+    
+    <!-- 好友Id -->
+    <result column="friendID" property="friendid" jdbcType="INTEGER" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    
+    <!-- 分享的阅读历史Id -->
+    <result column="readHistoryID" property="readhistoryid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    shareID, shareTitle, eBookID, userID, friendID, createTime, readHistoryID
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.retech.nyscms.entity.FrontShareExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from front_share
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from front_share
+    where shareID = #{shareid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from front_share
+    where shareID = #{shareid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.retech.nyscms.entity.FrontShareExample" >
+    delete from front_share
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" >
+    insert into front_share (shareID, shareTitle, eBookID, 
+      userID, friendID, createTime, 
+      readHistoryID)
+    values (#{shareid,jdbcType=INTEGER}, #{sharetitle,jdbcType=VARCHAR}, #{ebookid,jdbcType=INTEGER}, 
+      #{userid,jdbcType=INTEGER}, #{friendid,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{readhistoryid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" >
+    insert into front_share
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="shareid != null" >
+        shareID,
+      </if>
+      <if test="sharetitle != null" >
+        shareTitle,
+      </if>
+      <if test="ebookid != null" >
+        eBookID,
+      </if>
+      <if test="userid != null" >
+        userID,
+      </if>
+      <if test="friendid != null" >
+        friendID,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="readhistoryid != null" >
+        readHistoryID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="shareid != null" >
+        #{shareid,jdbcType=INTEGER},
+      </if>
+      <if test="sharetitle != null" >
+        #{sharetitle,jdbcType=VARCHAR},
+      </if>
+      <if test="ebookid != null" >
+        #{ebookid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="friendid != null" >
+        #{friendid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="readhistoryid != null" >
+        #{readhistoryid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.retech.nyscms.entity.FrontShareExample" resultType="java.lang.Integer" >
+    select count(*) from front_share
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update front_share
+    <set >
+      <if test="record.shareid != null" >
+        shareID = #{record.shareid,jdbcType=INTEGER},
+      </if>
+      <if test="record.sharetitle != null" >
+        shareTitle = #{record.sharetitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ebookid != null" >
+        eBookID = #{record.ebookid,jdbcType=INTEGER},
+      </if>
+      <if test="record.userid != null" >
+        userID = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.friendid != null" >
+        friendID = #{record.friendid,jdbcType=INTEGER},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.readhistoryid != null" >
+        readHistoryID = #{record.readhistoryid,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update front_share
+    set shareID = #{record.shareid,jdbcType=INTEGER},
+      shareTitle = #{record.sharetitle,jdbcType=VARCHAR},
+      eBookID = #{record.ebookid,jdbcType=INTEGER},
+      userID = #{record.userid,jdbcType=INTEGER},
+      friendID = #{record.friendid,jdbcType=INTEGER},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      readHistoryID = #{record.readhistoryid,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" >
+    update front_share
+    <set >
+      <if test="sharetitle != null" >
+        shareTitle = #{sharetitle,jdbcType=VARCHAR},
+      </if>
+      <if test="ebookid != null" >
+        eBookID = #{ebookid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        userID = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="friendid != null" >
+        friendID = #{friendid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="readhistoryid != null" >
+        readHistoryID = #{readhistoryid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where shareID = #{shareid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" >
+    update front_share
+    set shareTitle = #{sharetitle,jdbcType=VARCHAR},
+      eBookID = #{ebookid,jdbcType=INTEGER},
+      userID = #{userid,jdbcType=INTEGER},
+      friendID = #{friendid,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      readHistoryID = #{readhistoryid,jdbcType=INTEGER}
+    where shareID = #{shareid,jdbcType=INTEGER}
+  </update>
+  
+  <!-- ### 以上代码由MBG + CommentPlugin自动生成, 生成时间: 2019-03-04 11:42:34 ### -->
+
+
+
+  <!-- Your codes goes here!!! -->
+  
+</mapper>

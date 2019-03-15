@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.retech.nyscms.mapper.FrontUserNoteMapper" >
+  <resultMap id="BaseResultMap" type="com.retech.nyscms.entity.FrontUserNote" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    
+    <!-- 用户id -->
+    <result column="fk_user_id" property="fkUserId" jdbcType="INTEGER" />
+    
+    <!-- 图书id -->
+    <result column="fk_book_id" property="fkBookId" jdbcType="INTEGER" />
+    
+    <!-- 章节索引 -->
+    <result column="chapter_index" property="chapterIndex" jdbcType="VARCHAR" />
+    
+    <!-- 章节名称 -->
+    <result column="chapter_name" property="chapterName" jdbcType="VARCHAR" />
+    
+    <!-- 笔记坐标 -->
+    <result column="position" property="position" jdbcType="VARCHAR" />
+    
+    <!-- 笔记坐标偏移量 -->
+    <result column="position_offset" property="positionOffset" jdbcType="VARCHAR" />
+    
+    <!-- 笔记内容 -->
+    <result column="note_content" property="noteContent" jdbcType="VARCHAR" />
+    
+    <!-- 摘要下划线颜色 -->
+    <result column="summary_underline_color" property="summaryUnderlineColor" jdbcType="VARCHAR" />
+    <result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
+    <result column="info" property="info" jdbcType="VARCHAR" />
+    <result column="platform" property="platform" jdbcType="INTEGER" />
+    <result column="platformType" property="platformtype" jdbcType="VARCHAR" />
+    <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+    <result column="process" property="process" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.retech.nyscms.entity.FrontUserNote" extends="BaseResultMap" >
+    
+    <!-- 摘要内容 -->
+    <result column="summary_content" property="summaryContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, fk_user_id, fk_book_id, chapter_index, chapter_name, position, position_offset, 
+    note_content, summary_underline_color, add_time, info, platform, platformType, is_delete, 
+    process
+  </sql>
+  <sql id="Blob_Column_List" >
+    summary_content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.retech.nyscms.entity.FrontUserNoteExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from front_user_note
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.retech.nyscms.entity.FrontUserNoteExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from front_user_note
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from front_user_note
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from front_user_note
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.retech.nyscms.entity.FrontUserNoteExample" >
+    delete from front_user_note
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" >
+    insert into front_user_note (id, fk_user_id, fk_book_id, 
+      chapter_index, chapter_name, position, 
+      position_offset, note_content, summary_underline_color, 
+      add_time, info, platform, 
+      platformType, is_delete, process, 
+      summary_content)
+    values (#{id,jdbcType=INTEGER}, #{fkUserId,jdbcType=INTEGER}, #{fkBookId,jdbcType=INTEGER}, 
+      #{chapterIndex,jdbcType=VARCHAR}, #{chapterName,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}, 
+      #{positionOffset,jdbcType=VARCHAR}, #{noteContent,jdbcType=VARCHAR}, #{summaryUnderlineColor,jdbcType=VARCHAR}, 
+      #{addTime,jdbcType=TIMESTAMP}, #{info,jdbcType=VARCHAR}, #{platform,jdbcType=INTEGER}, 
+      #{platformtype,jdbcType=VARCHAR}, #{isDelete,jdbcType=INTEGER}, #{process,jdbcType=VARCHAR}, 
+      #{summaryContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" >
+    insert into front_user_note
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="fkUserId != null" >
+        fk_user_id,
+      </if>
+      <if test="fkBookId != null" >
+        fk_book_id,
+      </if>
+      <if test="chapterIndex != null" >
+        chapter_index,
+      </if>
+      <if test="chapterName != null" >
+        chapter_name,
+      </if>
+      <if test="position != null" >
+        position,
+      </if>
+      <if test="positionOffset != null" >
+        position_offset,
+      </if>
+      <if test="noteContent != null" >
+        note_content,
+      </if>
+      <if test="summaryUnderlineColor != null" >
+        summary_underline_color,
+      </if>
+      <if test="addTime != null" >
+        add_time,
+      </if>
+      <if test="info != null" >
+        info,
+      </if>
+      <if test="platform != null" >
+        platform,
+      </if>
+      <if test="platformtype != null" >
+        platformType,
+      </if>
+      <if test="isDelete != null" >
+        is_delete,
+      </if>
+      <if test="process != null" >
+        process,
+      </if>
+      <if test="summaryContent != null" >
+        summary_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="fkUserId != null" >
+        #{fkUserId,jdbcType=INTEGER},
+      </if>
+      <if test="fkBookId != null" >
+        #{fkBookId,jdbcType=INTEGER},
+      </if>
+      <if test="chapterIndex != null" >
+        #{chapterIndex,jdbcType=VARCHAR},
+      </if>
+      <if test="chapterName != null" >
+        #{chapterName,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="positionOffset != null" >
+        #{positionOffset,jdbcType=VARCHAR},
+      </if>
+      <if test="noteContent != null" >
+        #{noteContent,jdbcType=VARCHAR},
+      </if>
+      <if test="summaryUnderlineColor != null" >
+        #{summaryUnderlineColor,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="info != null" >
+        #{info,jdbcType=VARCHAR},
+      </if>
+      <if test="platform != null" >
+        #{platform,jdbcType=INTEGER},
+      </if>
+      <if test="platformtype != null" >
+        #{platformtype,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="process != null" >
+        #{process,jdbcType=VARCHAR},
+      </if>
+      <if test="summaryContent != null" >
+        #{summaryContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.retech.nyscms.entity.FrontUserNoteExample" resultType="java.lang.Integer" >
+    select count(*) from front_user_note
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update front_user_note
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.fkUserId != null" >
+        fk_user_id = #{record.fkUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.fkBookId != null" >
+        fk_book_id = #{record.fkBookId,jdbcType=INTEGER},
+      </if>
+      <if test="record.chapterIndex != null" >
+        chapter_index = #{record.chapterIndex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chapterName != null" >
+        chapter_name = #{record.chapterName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.position != null" >
+        position = #{record.position,jdbcType=VARCHAR},
+      </if>
+      <if test="record.positionOffset != null" >
+        position_offset = #{record.positionOffset,jdbcType=VARCHAR},
+      </if>
+      <if test="record.noteContent != null" >
+        note_content = #{record.noteContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.summaryUnderlineColor != null" >
+        summary_underline_color = #{record.summaryUnderlineColor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addTime != null" >
+        add_time = #{record.addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.info != null" >
+        info = #{record.info,jdbcType=VARCHAR},
+      </if>
+      <if test="record.platform != null" >
+        platform = #{record.platform,jdbcType=INTEGER},
+      </if>
+      <if test="record.platformtype != null" >
+        platformType = #{record.platformtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDelete != null" >
+        is_delete = #{record.isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="record.process != null" >
+        process = #{record.process,jdbcType=VARCHAR},
+      </if>
+      <if test="record.summaryContent != null" >
+        summary_content = #{record.summaryContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update front_user_note
+    set id = #{record.id,jdbcType=INTEGER},
+      fk_user_id = #{record.fkUserId,jdbcType=INTEGER},
+      fk_book_id = #{record.fkBookId,jdbcType=INTEGER},
+      chapter_index = #{record.chapterIndex,jdbcType=VARCHAR},
+      chapter_name = #{record.chapterName,jdbcType=VARCHAR},
+      position = #{record.position,jdbcType=VARCHAR},
+      position_offset = #{record.positionOffset,jdbcType=VARCHAR},
+      note_content = #{record.noteContent,jdbcType=VARCHAR},
+      summary_underline_color = #{record.summaryUnderlineColor,jdbcType=VARCHAR},
+      add_time = #{record.addTime,jdbcType=TIMESTAMP},
+      info = #{record.info,jdbcType=VARCHAR},
+      platform = #{record.platform,jdbcType=INTEGER},
+      platformType = #{record.platformtype,jdbcType=VARCHAR},
+      is_delete = #{record.isDelete,jdbcType=INTEGER},
+      process = #{record.process,jdbcType=VARCHAR},
+      summary_content = #{record.summaryContent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update front_user_note
+    set id = #{record.id,jdbcType=INTEGER},
+      fk_user_id = #{record.fkUserId,jdbcType=INTEGER},
+      fk_book_id = #{record.fkBookId,jdbcType=INTEGER},
+      chapter_index = #{record.chapterIndex,jdbcType=VARCHAR},
+      chapter_name = #{record.chapterName,jdbcType=VARCHAR},
+      position = #{record.position,jdbcType=VARCHAR},
+      position_offset = #{record.positionOffset,jdbcType=VARCHAR},
+      note_content = #{record.noteContent,jdbcType=VARCHAR},
+      summary_underline_color = #{record.summaryUnderlineColor,jdbcType=VARCHAR},
+      add_time = #{record.addTime,jdbcType=TIMESTAMP},
+      info = #{record.info,jdbcType=VARCHAR},
+      platform = #{record.platform,jdbcType=INTEGER},
+      platformType = #{record.platformtype,jdbcType=VARCHAR},
+      is_delete = #{record.isDelete,jdbcType=INTEGER},
+      process = #{record.process,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" >
+    update front_user_note
+    <set >
+      <if test="fkUserId != null" >
+        fk_user_id = #{fkUserId,jdbcType=INTEGER},
+      </if>
+      <if test="fkBookId != null" >
+        fk_book_id = #{fkBookId,jdbcType=INTEGER},
+      </if>
+      <if test="chapterIndex != null" >
+        chapter_index = #{chapterIndex,jdbcType=VARCHAR},
+      </if>
+      <if test="chapterName != null" >
+        chapter_name = #{chapterName,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        position = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="positionOffset != null" >
+        position_offset = #{positionOffset,jdbcType=VARCHAR},
+      </if>
+      <if test="noteContent != null" >
+        note_content = #{noteContent,jdbcType=VARCHAR},
+      </if>
+      <if test="summaryUnderlineColor != null" >
+        summary_underline_color = #{summaryUnderlineColor,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        add_time = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="info != null" >
+        info = #{info,jdbcType=VARCHAR},
+      </if>
+      <if test="platform != null" >
+        platform = #{platform,jdbcType=INTEGER},
+      </if>
+      <if test="platformtype != null" >
+        platformType = #{platformtype,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null" >
+        is_delete = #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="process != null" >
+        process = #{process,jdbcType=VARCHAR},
+      </if>
+      <if test="summaryContent != null" >
+        summary_content = #{summaryContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" >
+    update front_user_note
+    set fk_user_id = #{fkUserId,jdbcType=INTEGER},
+      fk_book_id = #{fkBookId,jdbcType=INTEGER},
+      chapter_index = #{chapterIndex,jdbcType=VARCHAR},
+      chapter_name = #{chapterName,jdbcType=VARCHAR},
+      position = #{position,jdbcType=VARCHAR},
+      position_offset = #{positionOffset,jdbcType=VARCHAR},
+      note_content = #{noteContent,jdbcType=VARCHAR},
+      summary_underline_color = #{summaryUnderlineColor,jdbcType=VARCHAR},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      info = #{info,jdbcType=VARCHAR},
+      platform = #{platform,jdbcType=INTEGER},
+      platformType = #{platformtype,jdbcType=VARCHAR},
+      is_delete = #{isDelete,jdbcType=INTEGER},
+      process = #{process,jdbcType=VARCHAR},
+      summary_content = #{summaryContent,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" >
+    update front_user_note
+    set fk_user_id = #{fkUserId,jdbcType=INTEGER},
+      fk_book_id = #{fkBookId,jdbcType=INTEGER},
+      chapter_index = #{chapterIndex,jdbcType=VARCHAR},
+      chapter_name = #{chapterName,jdbcType=VARCHAR},
+      position = #{position,jdbcType=VARCHAR},
+      position_offset = #{positionOffset,jdbcType=VARCHAR},
+      note_content = #{noteContent,jdbcType=VARCHAR},
+      summary_underline_color = #{summaryUnderlineColor,jdbcType=VARCHAR},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      info = #{info,jdbcType=VARCHAR},
+      platform = #{platform,jdbcType=INTEGER},
+      platformType = #{platformtype,jdbcType=VARCHAR},
+      is_delete = #{isDelete,jdbcType=INTEGER},
+      process = #{process,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <!-- ### 以上代码由MBG + CommentPlugin自动生成, 生成时间: 2019-03-04 11:42:33 ### -->
+
+
+
+  <!-- Your codes goes here!!! -->
+  
+</mapper>

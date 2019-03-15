@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.retech.nyscms.mapper.FrontOrderDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.retech.nyscms.entity.FrontOrderDetail" >
+    <id column="seqid" property="seqid" jdbcType="INTEGER" />
+    
+    <!-- 订单id -->
+    <result column="orderID" property="orderid" jdbcType="VARCHAR" />
+    
+    <!-- 图书id -->
+    <result column="eBookID" property="ebookid" jdbcType="INTEGER" />
+    
+    <!-- 系列id -->
+    <result column="serialID" property="serialid" jdbcType="INTEGER" />
+    
+    <!-- 专题id -->
+    <result column="themeId" property="themeid" jdbcType="INTEGER" />
+    
+    <!-- 价格 -->
+    <result column="price" property="price" jdbcType="REAL" />
+    
+    <!-- 书名 -->
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    
+    <!-- 购买数量 -->
+    <result column="quantity" property="quantity" jdbcType="INTEGER" />
+    
+    <!-- 购买/租阅的 0/null:单本书，1：系列，2：平台，3专题 -->
+    <result column="buyType" property="buytype" jdbcType="INTEGER" />
+    <result column="readDay" property="readday" jdbcType="INTEGER" />
+    
+    <!-- 评论状态 0:未评论 1:已评论 -->
+    <result column="commentStatus" property="commentstatus" jdbcType="INTEGER" />
+    
+    <!-- 使用的优惠券Id -->
+    <result column="couponId" property="couponid" jdbcType="INTEGER" />
+    <result column="createdtime" property="createdtime" jdbcType="TIMESTAMP" />
+    <result column="creatorid" property="creatorid" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    seqid, orderID, eBookID, serialID, themeId, price, name, quantity, buyType, readDay, 
+    commentStatus, couponId, createdtime, creatorid, status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.retech.nyscms.entity.FrontOrderDetailExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from front_order_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from front_order_detail
+    where seqid = #{seqid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from front_order_detail
+    where seqid = #{seqid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.retech.nyscms.entity.FrontOrderDetailExample" >
+    delete from front_order_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" >
+    insert into front_order_detail (seqid, orderID, eBookID, 
+      serialID, themeId, price, 
+      name, quantity, buyType, 
+      readDay, commentStatus, couponId, 
+      createdtime, creatorid, status
+      )
+    values (#{seqid,jdbcType=INTEGER}, #{orderid,jdbcType=VARCHAR}, #{ebookid,jdbcType=INTEGER}, 
+      #{serialid,jdbcType=INTEGER}, #{themeid,jdbcType=INTEGER}, #{price,jdbcType=REAL}, 
+      #{name,jdbcType=VARCHAR}, #{quantity,jdbcType=INTEGER}, #{buytype,jdbcType=INTEGER}, 
+      #{readday,jdbcType=INTEGER}, #{commentstatus,jdbcType=INTEGER}, #{couponid,jdbcType=INTEGER}, 
+      #{createdtime,jdbcType=TIMESTAMP}, #{creatorid,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" >
+    insert into front_order_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="seqid != null" >
+        seqid,
+      </if>
+      <if test="orderid != null" >
+        orderID,
+      </if>
+      <if test="ebookid != null" >
+        eBookID,
+      </if>
+      <if test="serialid != null" >
+        serialID,
+      </if>
+      <if test="themeid != null" >
+        themeId,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="quantity != null" >
+        quantity,
+      </if>
+      <if test="buytype != null" >
+        buyType,
+      </if>
+      <if test="readday != null" >
+        readDay,
+      </if>
+      <if test="commentstatus != null" >
+        commentStatus,
+      </if>
+      <if test="couponid != null" >
+        couponId,
+      </if>
+      <if test="createdtime != null" >
+        createdtime,
+      </if>
+      <if test="creatorid != null" >
+        creatorid,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="seqid != null" >
+        #{seqid,jdbcType=INTEGER},
+      </if>
+      <if test="orderid != null" >
+        #{orderid,jdbcType=VARCHAR},
+      </if>
+      <if test="ebookid != null" >
+        #{ebookid,jdbcType=INTEGER},
+      </if>
+      <if test="serialid != null" >
+        #{serialid,jdbcType=INTEGER},
+      </if>
+      <if test="themeid != null" >
+        #{themeid,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=REAL},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null" >
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="buytype != null" >
+        #{buytype,jdbcType=INTEGER},
+      </if>
+      <if test="readday != null" >
+        #{readday,jdbcType=INTEGER},
+      </if>
+      <if test="commentstatus != null" >
+        #{commentstatus,jdbcType=INTEGER},
+      </if>
+      <if test="couponid != null" >
+        #{couponid,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        #{createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatorid != null" >
+        #{creatorid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.retech.nyscms.entity.FrontOrderDetailExample" resultType="java.lang.Integer" >
+    select count(*) from front_order_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update front_order_detail
+    <set >
+      <if test="record.seqid != null" >
+        seqid = #{record.seqid,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderid != null" >
+        orderID = #{record.orderid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ebookid != null" >
+        eBookID = #{record.ebookid,jdbcType=INTEGER},
+      </if>
+      <if test="record.serialid != null" >
+        serialID = #{record.serialid,jdbcType=INTEGER},
+      </if>
+      <if test="record.themeid != null" >
+        themeId = #{record.themeid,jdbcType=INTEGER},
+      </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=REAL},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.quantity != null" >
+        quantity = #{record.quantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.buytype != null" >
+        buyType = #{record.buytype,jdbcType=INTEGER},
+      </if>
+      <if test="record.readday != null" >
+        readDay = #{record.readday,jdbcType=INTEGER},
+      </if>
+      <if test="record.commentstatus != null" >
+        commentStatus = #{record.commentstatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.couponid != null" >
+        couponId = #{record.couponid,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdtime != null" >
+        createdtime = #{record.createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.creatorid != null" >
+        creatorid = #{record.creatorid,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update front_order_detail
+    set seqid = #{record.seqid,jdbcType=INTEGER},
+      orderID = #{record.orderid,jdbcType=VARCHAR},
+      eBookID = #{record.ebookid,jdbcType=INTEGER},
+      serialID = #{record.serialid,jdbcType=INTEGER},
+      themeId = #{record.themeid,jdbcType=INTEGER},
+      price = #{record.price,jdbcType=REAL},
+      name = #{record.name,jdbcType=VARCHAR},
+      quantity = #{record.quantity,jdbcType=INTEGER},
+      buyType = #{record.buytype,jdbcType=INTEGER},
+      readDay = #{record.readday,jdbcType=INTEGER},
+      commentStatus = #{record.commentstatus,jdbcType=INTEGER},
+      couponId = #{record.couponid,jdbcType=INTEGER},
+      createdtime = #{record.createdtime,jdbcType=TIMESTAMP},
+      creatorid = #{record.creatorid,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" >
+    update front_order_detail
+    <set >
+      <if test="orderid != null" >
+        orderID = #{orderid,jdbcType=VARCHAR},
+      </if>
+      <if test="ebookid != null" >
+        eBookID = #{ebookid,jdbcType=INTEGER},
+      </if>
+      <if test="serialid != null" >
+        serialID = #{serialid,jdbcType=INTEGER},
+      </if>
+      <if test="themeid != null" >
+        themeId = #{themeid,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=REAL},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null" >
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="buytype != null" >
+        buyType = #{buytype,jdbcType=INTEGER},
+      </if>
+      <if test="readday != null" >
+        readDay = #{readday,jdbcType=INTEGER},
+      </if>
+      <if test="commentstatus != null" >
+        commentStatus = #{commentstatus,jdbcType=INTEGER},
+      </if>
+      <if test="couponid != null" >
+        couponId = #{couponid,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        createdtime = #{createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatorid != null" >
+        creatorid = #{creatorid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where seqid = #{seqid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" >
+    update front_order_detail
+    set orderID = #{orderid,jdbcType=VARCHAR},
+      eBookID = #{ebookid,jdbcType=INTEGER},
+      serialID = #{serialid,jdbcType=INTEGER},
+      themeId = #{themeid,jdbcType=INTEGER},
+      price = #{price,jdbcType=REAL},
+      name = #{name,jdbcType=VARCHAR},
+      quantity = #{quantity,jdbcType=INTEGER},
+      buyType = #{buytype,jdbcType=INTEGER},
+      readDay = #{readday,jdbcType=INTEGER},
+      commentStatus = #{commentstatus,jdbcType=INTEGER},
+      couponId = #{couponid,jdbcType=INTEGER},
+      createdtime = #{createdtime,jdbcType=TIMESTAMP},
+      creatorid = #{creatorid,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER}
+    where seqid = #{seqid,jdbcType=INTEGER}
+  </update>
+  
+  <!-- ### 以上代码由MBG + CommentPlugin自动生成, 生成时间: 2019-03-04 11:42:34 ### -->
+
+
+
+  <!-- Your codes goes here!!! -->
+  
+</mapper>

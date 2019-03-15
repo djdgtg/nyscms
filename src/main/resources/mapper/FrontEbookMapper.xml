@@ -1,0 +1,1209 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.retech.nyscms.mapper.FrontEbookMapper" >
+  <resultMap id="BaseResultMap" type="com.retech.nyscms.entity.FrontEbook" >
+    <id column="seqid" property="seqid" jdbcType="INTEGER" />
+    
+    <!-- 图书分类 -->
+    <result column="ClassID" property="classid" jdbcType="VARCHAR" />
+    
+    <!-- 书名 -->
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    
+    <!-- 价格 -->
+    <result column="price" property="price" jdbcType="REAL" />
+    <result column="eBookPrice" property="ebookprice" jdbcType="REAL" />
+    
+    <!-- 作者 -->
+    <result column="author" property="author" jdbcType="VARCHAR" />
+    
+    <!-- 出版时间 -->
+    <result column="publishTime" property="publishtime" jdbcType="DATE" />
+    
+    <!-- 图书状态：1未定价，2已定价，3未上架，4已上架 -->
+    <result column="ebookStatus" property="ebookstatus" jdbcType="VARCHAR" />
+    
+    <!-- 促销价格 -->
+    <result column="eBookTPrice" property="ebooktprice" jdbcType="REAL" />
+    
+    <!-- 系列id -->
+    <result column="serialID" property="serialid" jdbcType="VARCHAR" />
+    
+    <!-- 1:pdf 2:epub 3:超媒体 -->
+    <result column="eBookFormat" property="ebookformat" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    
+    <!-- 评分 -->
+    <result column="score" property="score" jdbcType="REAL" />
+    
+    <!-- 国际标准书号 -->
+    <result column="ISBN" property="isbn" jdbcType="VARCHAR" />
+    <result column="EISBN" property="eisbn" jdbcType="VARCHAR" />
+    
+    <!-- 出版社 -->
+    <result column="publishHouse" property="publishhouse" jdbcType="VARCHAR" />
+    
+    <!-- 页数 -->
+    <result column="page" property="page" jdbcType="INTEGER" />
+    <result column="lessonType" property="lessontype" jdbcType="INTEGER" />
+    <result column="applicableage" property="applicableage" jdbcType="INTEGER" />
+    <result column="languageClass" property="languageclass" jdbcType="VARCHAR" />
+    
+    <!-- 满减类型 -->
+    <result column="fullminusType" property="fullminustype" jdbcType="INTEGER" />
+    
+    <!-- 封面图片地址 -->
+    <result column="iconUrl" property="iconurl" jdbcType="VARCHAR" />
+    
+    <!-- 总字数 -->
+    <result column="totalWord" property="totalword" jdbcType="INTEGER" />
+    
+    <!-- 收藏人数 -->
+    <result column="favoriteNum" property="favoritenum" jdbcType="INTEGER" />
+    
+    <!-- 销量 -->
+    <result column="salesVolume" property="salesvolume" jdbcType="INTEGER" />
+    
+    <!-- 评论人数 -->
+    <result column="commentNumber" property="commentnumber" jdbcType="INTEGER" />
+    
+    <!-- 文件存放地址 -->
+    <result column="locationUrl" property="locationurl" jdbcType="VARCHAR" />
+    
+    <!-- 试读文件存放地址 -->
+    <result column="academicProbationUrl" property="academicprobationurl" jdbcType="VARCHAR" />
+    <result column="integraldeduction" property="integraldeduction" jdbcType="REAL" />
+    
+    <!-- 英文书名 -->
+    <result column="en_name" property="enName" jdbcType="VARCHAR" />
+    
+    <!-- 英文作者 -->
+    <result column="en_author" property="enAuthor" jdbcType="VARCHAR" />
+    <result column="en_title" property="enTitle" jdbcType="VARCHAR" />
+    <result column="en_publishHouse" property="enPublishhouse" jdbcType="VARCHAR" />
+    <result column="en_lessonType" property="enLessontype" jdbcType="INTEGER" />
+    <result column="en_languageClass" property="enLanguageclass" jdbcType="VARCHAR" />
+    <result column="createdtime" property="createdtime" jdbcType="TIMESTAMP" />
+    <result column="creatorid" property="creatorid" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    
+    <!-- 是否系列展示：1是，0否 -->
+    <result column="isdisplay" property="isdisplay" jdbcType="INTEGER" />
+    
+    <!-- 排序 -->
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    
+    <!-- 是否推荐展示：1是，0否 -->
+    <result column="isRecommend" property="isrecommend" jdbcType="INTEGER" />
+    
+    <!-- 是否新书展示：1代表是，0代表否 -->
+    <result column="isNewbook" property="isnewbook" jdbcType="INTEGER" />
+    
+    <!-- 专题id -->
+    <result column="themeId" property="themeid" jdbcType="INTEGER" />
+    <result column="bookdes" property="bookdes" jdbcType="VARCHAR" />
+    
+    <!-- 文件大小 -->
+    <result column="locationsize" property="locationsize" jdbcType="BIGINT" />
+    
+    <!-- 试读文件大小 -->
+    <result column="academicsize" property="academicsize" jdbcType="BIGINT" />
+    
+    <!-- 是否全平台包月：1是，0否 -->
+    <result column="isallseries" property="isallseries" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.retech.nyscms.entity.FrontEbookWithBLOBs" extends="BaseResultMap" >
+    
+    <!-- 内容简介 -->
+    <result column="contentValidity" property="contentvalidity" jdbcType="LONGVARCHAR" />
+    
+    <!-- 作者简介 -->
+    <result column="authorValidity" property="authorvalidity" jdbcType="LONGVARCHAR" />
+    
+    <!-- 目录 -->
+    <result column="catalogue" property="catalogue" jdbcType="LONGVARCHAR" />
+    <result column="editorsChoice" property="editorschoice" jdbcType="LONGVARCHAR" />
+    
+    <!-- 英文简介 -->
+    <result column="en_contentValidity" property="enContentvalidity" jdbcType="LONGVARCHAR" />
+    
+    <!-- 英文作者简介 -->
+    <result column="en_authorValidity" property="enAuthorvalidity" jdbcType="LONGVARCHAR" />
+    
+    <!-- 英文目录 -->
+    <result column="en_catalogue" property="enCatalogue" jdbcType="LONGVARCHAR" />
+    <result column="en_editorsChoice" property="enEditorschoice" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    seqid, ClassID, name, price, eBookPrice, author, publishTime, ebookStatus, eBookTPrice, 
+    serialID, eBookFormat, title, score, ISBN, EISBN, publishHouse, page, lessonType, 
+    applicableage, languageClass, fullminusType, iconUrl, totalWord, favoriteNum, salesVolume, 
+    commentNumber, locationUrl, academicProbationUrl, integraldeduction, en_name, en_author, 
+    en_title, en_publishHouse, en_lessonType, en_languageClass, createdtime, creatorid, 
+    status, isdisplay, sort, isRecommend, isNewbook, themeId, bookdes, locationsize, 
+    academicsize, isallseries
+  </sql>
+  <sql id="Blob_Column_List" >
+    contentValidity, authorValidity, catalogue, editorsChoice, en_contentValidity, en_authorValidity, 
+    en_catalogue, en_editorsChoice
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.retech.nyscms.entity.FrontEbookExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from front_ebook
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.retech.nyscms.entity.FrontEbookExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from front_ebook
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from front_ebook
+    where seqid = #{seqid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from front_ebook
+    where seqid = #{seqid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.retech.nyscms.entity.FrontEbookExample" >
+    delete from front_ebook
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" >
+    insert into front_ebook (seqid, ClassID, name, 
+      price, eBookPrice, author, 
+      publishTime, ebookStatus, eBookTPrice, 
+      serialID, eBookFormat, title, 
+      score, ISBN, EISBN, publishHouse, 
+      page, lessonType, applicableage, 
+      languageClass, fullminusType, iconUrl, 
+      totalWord, favoriteNum, salesVolume, 
+      commentNumber, locationUrl, academicProbationUrl, 
+      integraldeduction, en_name, en_author, 
+      en_title, en_publishHouse, en_lessonType, 
+      en_languageClass, createdtime, creatorid, 
+      status, isdisplay, sort, 
+      isRecommend, isNewbook, themeId, 
+      bookdes, locationsize, academicsize, 
+      isallseries, contentValidity, authorValidity, 
+      catalogue, editorsChoice, en_contentValidity, 
+      en_authorValidity, en_catalogue, 
+      en_editorsChoice)
+    values (#{seqid,jdbcType=INTEGER}, #{classid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{price,jdbcType=REAL}, #{ebookprice,jdbcType=REAL}, #{author,jdbcType=VARCHAR}, 
+      #{publishtime,jdbcType=DATE}, #{ebookstatus,jdbcType=VARCHAR}, #{ebooktprice,jdbcType=REAL}, 
+      #{serialid,jdbcType=VARCHAR}, #{ebookformat,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{score,jdbcType=REAL}, #{isbn,jdbcType=VARCHAR}, #{eisbn,jdbcType=VARCHAR}, #{publishhouse,jdbcType=VARCHAR}, 
+      #{page,jdbcType=INTEGER}, #{lessontype,jdbcType=INTEGER}, #{applicableage,jdbcType=INTEGER}, 
+      #{languageclass,jdbcType=VARCHAR}, #{fullminustype,jdbcType=INTEGER}, #{iconurl,jdbcType=VARCHAR}, 
+      #{totalword,jdbcType=INTEGER}, #{favoritenum,jdbcType=INTEGER}, #{salesvolume,jdbcType=INTEGER}, 
+      #{commentnumber,jdbcType=INTEGER}, #{locationurl,jdbcType=VARCHAR}, #{academicprobationurl,jdbcType=VARCHAR}, 
+      #{integraldeduction,jdbcType=REAL}, #{enName,jdbcType=VARCHAR}, #{enAuthor,jdbcType=VARCHAR}, 
+      #{enTitle,jdbcType=VARCHAR}, #{enPublishhouse,jdbcType=VARCHAR}, #{enLessontype,jdbcType=INTEGER}, 
+      #{enLanguageclass,jdbcType=VARCHAR}, #{createdtime,jdbcType=TIMESTAMP}, #{creatorid,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{isdisplay,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, 
+      #{isrecommend,jdbcType=INTEGER}, #{isnewbook,jdbcType=INTEGER}, #{themeid,jdbcType=INTEGER}, 
+      #{bookdes,jdbcType=VARCHAR}, #{locationsize,jdbcType=BIGINT}, #{academicsize,jdbcType=BIGINT}, 
+      #{isallseries,jdbcType=VARCHAR}, #{contentvalidity,jdbcType=LONGVARCHAR}, #{authorvalidity,jdbcType=LONGVARCHAR}, 
+      #{catalogue,jdbcType=LONGVARCHAR}, #{editorschoice,jdbcType=LONGVARCHAR}, #{enContentvalidity,jdbcType=LONGVARCHAR}, 
+      #{enAuthorvalidity,jdbcType=LONGVARCHAR}, #{enCatalogue,jdbcType=LONGVARCHAR}, 
+      #{enEditorschoice,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" >
+    insert into front_ebook
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="seqid != null" >
+        seqid,
+      </if>
+      <if test="classid != null" >
+        ClassID,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="ebookprice != null" >
+        eBookPrice,
+      </if>
+      <if test="author != null" >
+        author,
+      </if>
+      <if test="publishtime != null" >
+        publishTime,
+      </if>
+      <if test="ebookstatus != null" >
+        ebookStatus,
+      </if>
+      <if test="ebooktprice != null" >
+        eBookTPrice,
+      </if>
+      <if test="serialid != null" >
+        serialID,
+      </if>
+      <if test="ebookformat != null" >
+        eBookFormat,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+      <if test="isbn != null" >
+        ISBN,
+      </if>
+      <if test="eisbn != null" >
+        EISBN,
+      </if>
+      <if test="publishhouse != null" >
+        publishHouse,
+      </if>
+      <if test="page != null" >
+        page,
+      </if>
+      <if test="lessontype != null" >
+        lessonType,
+      </if>
+      <if test="applicableage != null" >
+        applicableage,
+      </if>
+      <if test="languageclass != null" >
+        languageClass,
+      </if>
+      <if test="fullminustype != null" >
+        fullminusType,
+      </if>
+      <if test="iconurl != null" >
+        iconUrl,
+      </if>
+      <if test="totalword != null" >
+        totalWord,
+      </if>
+      <if test="favoritenum != null" >
+        favoriteNum,
+      </if>
+      <if test="salesvolume != null" >
+        salesVolume,
+      </if>
+      <if test="commentnumber != null" >
+        commentNumber,
+      </if>
+      <if test="locationurl != null" >
+        locationUrl,
+      </if>
+      <if test="academicprobationurl != null" >
+        academicProbationUrl,
+      </if>
+      <if test="integraldeduction != null" >
+        integraldeduction,
+      </if>
+      <if test="enName != null" >
+        en_name,
+      </if>
+      <if test="enAuthor != null" >
+        en_author,
+      </if>
+      <if test="enTitle != null" >
+        en_title,
+      </if>
+      <if test="enPublishhouse != null" >
+        en_publishHouse,
+      </if>
+      <if test="enLessontype != null" >
+        en_lessonType,
+      </if>
+      <if test="enLanguageclass != null" >
+        en_languageClass,
+      </if>
+      <if test="createdtime != null" >
+        createdtime,
+      </if>
+      <if test="creatorid != null" >
+        creatorid,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="isdisplay != null" >
+        isdisplay,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="isrecommend != null" >
+        isRecommend,
+      </if>
+      <if test="isnewbook != null" >
+        isNewbook,
+      </if>
+      <if test="themeid != null" >
+        themeId,
+      </if>
+      <if test="bookdes != null" >
+        bookdes,
+      </if>
+      <if test="locationsize != null" >
+        locationsize,
+      </if>
+      <if test="academicsize != null" >
+        academicsize,
+      </if>
+      <if test="isallseries != null" >
+        isallseries,
+      </if>
+      <if test="contentvalidity != null" >
+        contentValidity,
+      </if>
+      <if test="authorvalidity != null" >
+        authorValidity,
+      </if>
+      <if test="catalogue != null" >
+        catalogue,
+      </if>
+      <if test="editorschoice != null" >
+        editorsChoice,
+      </if>
+      <if test="enContentvalidity != null" >
+        en_contentValidity,
+      </if>
+      <if test="enAuthorvalidity != null" >
+        en_authorValidity,
+      </if>
+      <if test="enCatalogue != null" >
+        en_catalogue,
+      </if>
+      <if test="enEditorschoice != null" >
+        en_editorsChoice,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="seqid != null" >
+        #{seqid,jdbcType=INTEGER},
+      </if>
+      <if test="classid != null" >
+        #{classid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=REAL},
+      </if>
+      <if test="ebookprice != null" >
+        #{ebookprice,jdbcType=REAL},
+      </if>
+      <if test="author != null" >
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="publishtime != null" >
+        #{publishtime,jdbcType=DATE},
+      </if>
+      <if test="ebookstatus != null" >
+        #{ebookstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="ebooktprice != null" >
+        #{ebooktprice,jdbcType=REAL},
+      </if>
+      <if test="serialid != null" >
+        #{serialid,jdbcType=VARCHAR},
+      </if>
+      <if test="ebookformat != null" >
+        #{ebookformat,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=REAL},
+      </if>
+      <if test="isbn != null" >
+        #{isbn,jdbcType=VARCHAR},
+      </if>
+      <if test="eisbn != null" >
+        #{eisbn,jdbcType=VARCHAR},
+      </if>
+      <if test="publishhouse != null" >
+        #{publishhouse,jdbcType=VARCHAR},
+      </if>
+      <if test="page != null" >
+        #{page,jdbcType=INTEGER},
+      </if>
+      <if test="lessontype != null" >
+        #{lessontype,jdbcType=INTEGER},
+      </if>
+      <if test="applicableage != null" >
+        #{applicableage,jdbcType=INTEGER},
+      </if>
+      <if test="languageclass != null" >
+        #{languageclass,jdbcType=VARCHAR},
+      </if>
+      <if test="fullminustype != null" >
+        #{fullminustype,jdbcType=INTEGER},
+      </if>
+      <if test="iconurl != null" >
+        #{iconurl,jdbcType=VARCHAR},
+      </if>
+      <if test="totalword != null" >
+        #{totalword,jdbcType=INTEGER},
+      </if>
+      <if test="favoritenum != null" >
+        #{favoritenum,jdbcType=INTEGER},
+      </if>
+      <if test="salesvolume != null" >
+        #{salesvolume,jdbcType=INTEGER},
+      </if>
+      <if test="commentnumber != null" >
+        #{commentnumber,jdbcType=INTEGER},
+      </if>
+      <if test="locationurl != null" >
+        #{locationurl,jdbcType=VARCHAR},
+      </if>
+      <if test="academicprobationurl != null" >
+        #{academicprobationurl,jdbcType=VARCHAR},
+      </if>
+      <if test="integraldeduction != null" >
+        #{integraldeduction,jdbcType=REAL},
+      </if>
+      <if test="enName != null" >
+        #{enName,jdbcType=VARCHAR},
+      </if>
+      <if test="enAuthor != null" >
+        #{enAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="enTitle != null" >
+        #{enTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="enPublishhouse != null" >
+        #{enPublishhouse,jdbcType=VARCHAR},
+      </if>
+      <if test="enLessontype != null" >
+        #{enLessontype,jdbcType=INTEGER},
+      </if>
+      <if test="enLanguageclass != null" >
+        #{enLanguageclass,jdbcType=VARCHAR},
+      </if>
+      <if test="createdtime != null" >
+        #{createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatorid != null" >
+        #{creatorid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="isdisplay != null" >
+        #{isdisplay,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="isrecommend != null" >
+        #{isrecommend,jdbcType=INTEGER},
+      </if>
+      <if test="isnewbook != null" >
+        #{isnewbook,jdbcType=INTEGER},
+      </if>
+      <if test="themeid != null" >
+        #{themeid,jdbcType=INTEGER},
+      </if>
+      <if test="bookdes != null" >
+        #{bookdes,jdbcType=VARCHAR},
+      </if>
+      <if test="locationsize != null" >
+        #{locationsize,jdbcType=BIGINT},
+      </if>
+      <if test="academicsize != null" >
+        #{academicsize,jdbcType=BIGINT},
+      </if>
+      <if test="isallseries != null" >
+        #{isallseries,jdbcType=VARCHAR},
+      </if>
+      <if test="contentvalidity != null" >
+        #{contentvalidity,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="authorvalidity != null" >
+        #{authorvalidity,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="catalogue != null" >
+        #{catalogue,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="editorschoice != null" >
+        #{editorschoice,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="enContentvalidity != null" >
+        #{enContentvalidity,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="enAuthorvalidity != null" >
+        #{enAuthorvalidity,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="enCatalogue != null" >
+        #{enCatalogue,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="enEditorschoice != null" >
+        #{enEditorschoice,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.retech.nyscms.entity.FrontEbookExample" resultType="java.lang.Integer" >
+    select count(*) from front_ebook
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update front_ebook
+    <set >
+      <if test="record.seqid != null" >
+        seqid = #{record.seqid,jdbcType=INTEGER},
+      </if>
+      <if test="record.classid != null" >
+        ClassID = #{record.classid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=REAL},
+      </if>
+      <if test="record.ebookprice != null" >
+        eBookPrice = #{record.ebookprice,jdbcType=REAL},
+      </if>
+      <if test="record.author != null" >
+        author = #{record.author,jdbcType=VARCHAR},
+      </if>
+      <if test="record.publishtime != null" >
+        publishTime = #{record.publishtime,jdbcType=DATE},
+      </if>
+      <if test="record.ebookstatus != null" >
+        ebookStatus = #{record.ebookstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ebooktprice != null" >
+        eBookTPrice = #{record.ebooktprice,jdbcType=REAL},
+      </if>
+      <if test="record.serialid != null" >
+        serialID = #{record.serialid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ebookformat != null" >
+        eBookFormat = #{record.ebookformat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.score != null" >
+        score = #{record.score,jdbcType=REAL},
+      </if>
+      <if test="record.isbn != null" >
+        ISBN = #{record.isbn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.eisbn != null" >
+        EISBN = #{record.eisbn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.publishhouse != null" >
+        publishHouse = #{record.publishhouse,jdbcType=VARCHAR},
+      </if>
+      <if test="record.page != null" >
+        page = #{record.page,jdbcType=INTEGER},
+      </if>
+      <if test="record.lessontype != null" >
+        lessonType = #{record.lessontype,jdbcType=INTEGER},
+      </if>
+      <if test="record.applicableage != null" >
+        applicableage = #{record.applicableage,jdbcType=INTEGER},
+      </if>
+      <if test="record.languageclass != null" >
+        languageClass = #{record.languageclass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fullminustype != null" >
+        fullminusType = #{record.fullminustype,jdbcType=INTEGER},
+      </if>
+      <if test="record.iconurl != null" >
+        iconUrl = #{record.iconurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalword != null" >
+        totalWord = #{record.totalword,jdbcType=INTEGER},
+      </if>
+      <if test="record.favoritenum != null" >
+        favoriteNum = #{record.favoritenum,jdbcType=INTEGER},
+      </if>
+      <if test="record.salesvolume != null" >
+        salesVolume = #{record.salesvolume,jdbcType=INTEGER},
+      </if>
+      <if test="record.commentnumber != null" >
+        commentNumber = #{record.commentnumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.locationurl != null" >
+        locationUrl = #{record.locationurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.academicprobationurl != null" >
+        academicProbationUrl = #{record.academicprobationurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.integraldeduction != null" >
+        integraldeduction = #{record.integraldeduction,jdbcType=REAL},
+      </if>
+      <if test="record.enName != null" >
+        en_name = #{record.enName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enAuthor != null" >
+        en_author = #{record.enAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enTitle != null" >
+        en_title = #{record.enTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enPublishhouse != null" >
+        en_publishHouse = #{record.enPublishhouse,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enLessontype != null" >
+        en_lessonType = #{record.enLessontype,jdbcType=INTEGER},
+      </if>
+      <if test="record.enLanguageclass != null" >
+        en_languageClass = #{record.enLanguageclass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdtime != null" >
+        createdtime = #{record.createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.creatorid != null" >
+        creatorid = #{record.creatorid,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.isdisplay != null" >
+        isdisplay = #{record.isdisplay,jdbcType=INTEGER},
+      </if>
+      <if test="record.sort != null" >
+        sort = #{record.sort,jdbcType=INTEGER},
+      </if>
+      <if test="record.isrecommend != null" >
+        isRecommend = #{record.isrecommend,jdbcType=INTEGER},
+      </if>
+      <if test="record.isnewbook != null" >
+        isNewbook = #{record.isnewbook,jdbcType=INTEGER},
+      </if>
+      <if test="record.themeid != null" >
+        themeId = #{record.themeid,jdbcType=INTEGER},
+      </if>
+      <if test="record.bookdes != null" >
+        bookdes = #{record.bookdes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.locationsize != null" >
+        locationsize = #{record.locationsize,jdbcType=BIGINT},
+      </if>
+      <if test="record.academicsize != null" >
+        academicsize = #{record.academicsize,jdbcType=BIGINT},
+      </if>
+      <if test="record.isallseries != null" >
+        isallseries = #{record.isallseries,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contentvalidity != null" >
+        contentValidity = #{record.contentvalidity,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.authorvalidity != null" >
+        authorValidity = #{record.authorvalidity,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.catalogue != null" >
+        catalogue = #{record.catalogue,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.editorschoice != null" >
+        editorsChoice = #{record.editorschoice,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.enContentvalidity != null" >
+        en_contentValidity = #{record.enContentvalidity,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.enAuthorvalidity != null" >
+        en_authorValidity = #{record.enAuthorvalidity,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.enCatalogue != null" >
+        en_catalogue = #{record.enCatalogue,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.enEditorschoice != null" >
+        en_editorsChoice = #{record.enEditorschoice,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update front_ebook
+    set seqid = #{record.seqid,jdbcType=INTEGER},
+      ClassID = #{record.classid,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      price = #{record.price,jdbcType=REAL},
+      eBookPrice = #{record.ebookprice,jdbcType=REAL},
+      author = #{record.author,jdbcType=VARCHAR},
+      publishTime = #{record.publishtime,jdbcType=DATE},
+      ebookStatus = #{record.ebookstatus,jdbcType=VARCHAR},
+      eBookTPrice = #{record.ebooktprice,jdbcType=REAL},
+      serialID = #{record.serialid,jdbcType=VARCHAR},
+      eBookFormat = #{record.ebookformat,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      score = #{record.score,jdbcType=REAL},
+      ISBN = #{record.isbn,jdbcType=VARCHAR},
+      EISBN = #{record.eisbn,jdbcType=VARCHAR},
+      publishHouse = #{record.publishhouse,jdbcType=VARCHAR},
+      page = #{record.page,jdbcType=INTEGER},
+      lessonType = #{record.lessontype,jdbcType=INTEGER},
+      applicableage = #{record.applicableage,jdbcType=INTEGER},
+      languageClass = #{record.languageclass,jdbcType=VARCHAR},
+      fullminusType = #{record.fullminustype,jdbcType=INTEGER},
+      iconUrl = #{record.iconurl,jdbcType=VARCHAR},
+      totalWord = #{record.totalword,jdbcType=INTEGER},
+      favoriteNum = #{record.favoritenum,jdbcType=INTEGER},
+      salesVolume = #{record.salesvolume,jdbcType=INTEGER},
+      commentNumber = #{record.commentnumber,jdbcType=INTEGER},
+      locationUrl = #{record.locationurl,jdbcType=VARCHAR},
+      academicProbationUrl = #{record.academicprobationurl,jdbcType=VARCHAR},
+      integraldeduction = #{record.integraldeduction,jdbcType=REAL},
+      en_name = #{record.enName,jdbcType=VARCHAR},
+      en_author = #{record.enAuthor,jdbcType=VARCHAR},
+      en_title = #{record.enTitle,jdbcType=VARCHAR},
+      en_publishHouse = #{record.enPublishhouse,jdbcType=VARCHAR},
+      en_lessonType = #{record.enLessontype,jdbcType=INTEGER},
+      en_languageClass = #{record.enLanguageclass,jdbcType=VARCHAR},
+      createdtime = #{record.createdtime,jdbcType=TIMESTAMP},
+      creatorid = #{record.creatorid,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      isdisplay = #{record.isdisplay,jdbcType=INTEGER},
+      sort = #{record.sort,jdbcType=INTEGER},
+      isRecommend = #{record.isrecommend,jdbcType=INTEGER},
+      isNewbook = #{record.isnewbook,jdbcType=INTEGER},
+      themeId = #{record.themeid,jdbcType=INTEGER},
+      bookdes = #{record.bookdes,jdbcType=VARCHAR},
+      locationsize = #{record.locationsize,jdbcType=BIGINT},
+      academicsize = #{record.academicsize,jdbcType=BIGINT},
+      isallseries = #{record.isallseries,jdbcType=VARCHAR},
+      contentValidity = #{record.contentvalidity,jdbcType=LONGVARCHAR},
+      authorValidity = #{record.authorvalidity,jdbcType=LONGVARCHAR},
+      catalogue = #{record.catalogue,jdbcType=LONGVARCHAR},
+      editorsChoice = #{record.editorschoice,jdbcType=LONGVARCHAR},
+      en_contentValidity = #{record.enContentvalidity,jdbcType=LONGVARCHAR},
+      en_authorValidity = #{record.enAuthorvalidity,jdbcType=LONGVARCHAR},
+      en_catalogue = #{record.enCatalogue,jdbcType=LONGVARCHAR},
+      en_editorsChoice = #{record.enEditorschoice,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update front_ebook
+    set seqid = #{record.seqid,jdbcType=INTEGER},
+      ClassID = #{record.classid,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      price = #{record.price,jdbcType=REAL},
+      eBookPrice = #{record.ebookprice,jdbcType=REAL},
+      author = #{record.author,jdbcType=VARCHAR},
+      publishTime = #{record.publishtime,jdbcType=DATE},
+      ebookStatus = #{record.ebookstatus,jdbcType=VARCHAR},
+      eBookTPrice = #{record.ebooktprice,jdbcType=REAL},
+      serialID = #{record.serialid,jdbcType=VARCHAR},
+      eBookFormat = #{record.ebookformat,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      score = #{record.score,jdbcType=REAL},
+      ISBN = #{record.isbn,jdbcType=VARCHAR},
+      EISBN = #{record.eisbn,jdbcType=VARCHAR},
+      publishHouse = #{record.publishhouse,jdbcType=VARCHAR},
+      page = #{record.page,jdbcType=INTEGER},
+      lessonType = #{record.lessontype,jdbcType=INTEGER},
+      applicableage = #{record.applicableage,jdbcType=INTEGER},
+      languageClass = #{record.languageclass,jdbcType=VARCHAR},
+      fullminusType = #{record.fullminustype,jdbcType=INTEGER},
+      iconUrl = #{record.iconurl,jdbcType=VARCHAR},
+      totalWord = #{record.totalword,jdbcType=INTEGER},
+      favoriteNum = #{record.favoritenum,jdbcType=INTEGER},
+      salesVolume = #{record.salesvolume,jdbcType=INTEGER},
+      commentNumber = #{record.commentnumber,jdbcType=INTEGER},
+      locationUrl = #{record.locationurl,jdbcType=VARCHAR},
+      academicProbationUrl = #{record.academicprobationurl,jdbcType=VARCHAR},
+      integraldeduction = #{record.integraldeduction,jdbcType=REAL},
+      en_name = #{record.enName,jdbcType=VARCHAR},
+      en_author = #{record.enAuthor,jdbcType=VARCHAR},
+      en_title = #{record.enTitle,jdbcType=VARCHAR},
+      en_publishHouse = #{record.enPublishhouse,jdbcType=VARCHAR},
+      en_lessonType = #{record.enLessontype,jdbcType=INTEGER},
+      en_languageClass = #{record.enLanguageclass,jdbcType=VARCHAR},
+      createdtime = #{record.createdtime,jdbcType=TIMESTAMP},
+      creatorid = #{record.creatorid,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      isdisplay = #{record.isdisplay,jdbcType=INTEGER},
+      sort = #{record.sort,jdbcType=INTEGER},
+      isRecommend = #{record.isrecommend,jdbcType=INTEGER},
+      isNewbook = #{record.isnewbook,jdbcType=INTEGER},
+      themeId = #{record.themeid,jdbcType=INTEGER},
+      bookdes = #{record.bookdes,jdbcType=VARCHAR},
+      locationsize = #{record.locationsize,jdbcType=BIGINT},
+      academicsize = #{record.academicsize,jdbcType=BIGINT},
+      isallseries = #{record.isallseries,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" >
+    update front_ebook
+    <set >
+      <if test="classid != null" >
+        ClassID = #{classid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=REAL},
+      </if>
+      <if test="ebookprice != null" >
+        eBookPrice = #{ebookprice,jdbcType=REAL},
+      </if>
+      <if test="author != null" >
+        author = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="publishtime != null" >
+        publishTime = #{publishtime,jdbcType=DATE},
+      </if>
+      <if test="ebookstatus != null" >
+        ebookStatus = #{ebookstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="ebooktprice != null" >
+        eBookTPrice = #{ebooktprice,jdbcType=REAL},
+      </if>
+      <if test="serialid != null" >
+        serialID = #{serialid,jdbcType=VARCHAR},
+      </if>
+      <if test="ebookformat != null" >
+        eBookFormat = #{ebookformat,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null" >
+        score = #{score,jdbcType=REAL},
+      </if>
+      <if test="isbn != null" >
+        ISBN = #{isbn,jdbcType=VARCHAR},
+      </if>
+      <if test="eisbn != null" >
+        EISBN = #{eisbn,jdbcType=VARCHAR},
+      </if>
+      <if test="publishhouse != null" >
+        publishHouse = #{publishhouse,jdbcType=VARCHAR},
+      </if>
+      <if test="page != null" >
+        page = #{page,jdbcType=INTEGER},
+      </if>
+      <if test="lessontype != null" >
+        lessonType = #{lessontype,jdbcType=INTEGER},
+      </if>
+      <if test="applicableage != null" >
+        applicableage = #{applicableage,jdbcType=INTEGER},
+      </if>
+      <if test="languageclass != null" >
+        languageClass = #{languageclass,jdbcType=VARCHAR},
+      </if>
+      <if test="fullminustype != null" >
+        fullminusType = #{fullminustype,jdbcType=INTEGER},
+      </if>
+      <if test="iconurl != null" >
+        iconUrl = #{iconurl,jdbcType=VARCHAR},
+      </if>
+      <if test="totalword != null" >
+        totalWord = #{totalword,jdbcType=INTEGER},
+      </if>
+      <if test="favoritenum != null" >
+        favoriteNum = #{favoritenum,jdbcType=INTEGER},
+      </if>
+      <if test="salesvolume != null" >
+        salesVolume = #{salesvolume,jdbcType=INTEGER},
+      </if>
+      <if test="commentnumber != null" >
+        commentNumber = #{commentnumber,jdbcType=INTEGER},
+      </if>
+      <if test="locationurl != null" >
+        locationUrl = #{locationurl,jdbcType=VARCHAR},
+      </if>
+      <if test="academicprobationurl != null" >
+        academicProbationUrl = #{academicprobationurl,jdbcType=VARCHAR},
+      </if>
+      <if test="integraldeduction != null" >
+        integraldeduction = #{integraldeduction,jdbcType=REAL},
+      </if>
+      <if test="enName != null" >
+        en_name = #{enName,jdbcType=VARCHAR},
+      </if>
+      <if test="enAuthor != null" >
+        en_author = #{enAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="enTitle != null" >
+        en_title = #{enTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="enPublishhouse != null" >
+        en_publishHouse = #{enPublishhouse,jdbcType=VARCHAR},
+      </if>
+      <if test="enLessontype != null" >
+        en_lessonType = #{enLessontype,jdbcType=INTEGER},
+      </if>
+      <if test="enLanguageclass != null" >
+        en_languageClass = #{enLanguageclass,jdbcType=VARCHAR},
+      </if>
+      <if test="createdtime != null" >
+        createdtime = #{createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatorid != null" >
+        creatorid = #{creatorid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="isdisplay != null" >
+        isdisplay = #{isdisplay,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="isrecommend != null" >
+        isRecommend = #{isrecommend,jdbcType=INTEGER},
+      </if>
+      <if test="isnewbook != null" >
+        isNewbook = #{isnewbook,jdbcType=INTEGER},
+      </if>
+      <if test="themeid != null" >
+        themeId = #{themeid,jdbcType=INTEGER},
+      </if>
+      <if test="bookdes != null" >
+        bookdes = #{bookdes,jdbcType=VARCHAR},
+      </if>
+      <if test="locationsize != null" >
+        locationsize = #{locationsize,jdbcType=BIGINT},
+      </if>
+      <if test="academicsize != null" >
+        academicsize = #{academicsize,jdbcType=BIGINT},
+      </if>
+      <if test="isallseries != null" >
+        isallseries = #{isallseries,jdbcType=VARCHAR},
+      </if>
+      <if test="contentvalidity != null" >
+        contentValidity = #{contentvalidity,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="authorvalidity != null" >
+        authorValidity = #{authorvalidity,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="catalogue != null" >
+        catalogue = #{catalogue,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="editorschoice != null" >
+        editorsChoice = #{editorschoice,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="enContentvalidity != null" >
+        en_contentValidity = #{enContentvalidity,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="enAuthorvalidity != null" >
+        en_authorValidity = #{enAuthorvalidity,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="enCatalogue != null" >
+        en_catalogue = #{enCatalogue,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="enEditorschoice != null" >
+        en_editorsChoice = #{enEditorschoice,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where seqid = #{seqid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" >
+    update front_ebook
+    set ClassID = #{classid,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      price = #{price,jdbcType=REAL},
+      eBookPrice = #{ebookprice,jdbcType=REAL},
+      author = #{author,jdbcType=VARCHAR},
+      publishTime = #{publishtime,jdbcType=DATE},
+      ebookStatus = #{ebookstatus,jdbcType=VARCHAR},
+      eBookTPrice = #{ebooktprice,jdbcType=REAL},
+      serialID = #{serialid,jdbcType=VARCHAR},
+      eBookFormat = #{ebookformat,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      score = #{score,jdbcType=REAL},
+      ISBN = #{isbn,jdbcType=VARCHAR},
+      EISBN = #{eisbn,jdbcType=VARCHAR},
+      publishHouse = #{publishhouse,jdbcType=VARCHAR},
+      page = #{page,jdbcType=INTEGER},
+      lessonType = #{lessontype,jdbcType=INTEGER},
+      applicableage = #{applicableage,jdbcType=INTEGER},
+      languageClass = #{languageclass,jdbcType=VARCHAR},
+      fullminusType = #{fullminustype,jdbcType=INTEGER},
+      iconUrl = #{iconurl,jdbcType=VARCHAR},
+      totalWord = #{totalword,jdbcType=INTEGER},
+      favoriteNum = #{favoritenum,jdbcType=INTEGER},
+      salesVolume = #{salesvolume,jdbcType=INTEGER},
+      commentNumber = #{commentnumber,jdbcType=INTEGER},
+      locationUrl = #{locationurl,jdbcType=VARCHAR},
+      academicProbationUrl = #{academicprobationurl,jdbcType=VARCHAR},
+      integraldeduction = #{integraldeduction,jdbcType=REAL},
+      en_name = #{enName,jdbcType=VARCHAR},
+      en_author = #{enAuthor,jdbcType=VARCHAR},
+      en_title = #{enTitle,jdbcType=VARCHAR},
+      en_publishHouse = #{enPublishhouse,jdbcType=VARCHAR},
+      en_lessonType = #{enLessontype,jdbcType=INTEGER},
+      en_languageClass = #{enLanguageclass,jdbcType=VARCHAR},
+      createdtime = #{createdtime,jdbcType=TIMESTAMP},
+      creatorid = #{creatorid,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      isdisplay = #{isdisplay,jdbcType=INTEGER},
+      sort = #{sort,jdbcType=INTEGER},
+      isRecommend = #{isrecommend,jdbcType=INTEGER},
+      isNewbook = #{isnewbook,jdbcType=INTEGER},
+      themeId = #{themeid,jdbcType=INTEGER},
+      bookdes = #{bookdes,jdbcType=VARCHAR},
+      locationsize = #{locationsize,jdbcType=BIGINT},
+      academicsize = #{academicsize,jdbcType=BIGINT},
+      isallseries = #{isallseries,jdbcType=VARCHAR},
+      contentValidity = #{contentvalidity,jdbcType=LONGVARCHAR},
+      authorValidity = #{authorvalidity,jdbcType=LONGVARCHAR},
+      catalogue = #{catalogue,jdbcType=LONGVARCHAR},
+      editorsChoice = #{editorschoice,jdbcType=LONGVARCHAR},
+      en_contentValidity = #{enContentvalidity,jdbcType=LONGVARCHAR},
+      en_authorValidity = #{enAuthorvalidity,jdbcType=LONGVARCHAR},
+      en_catalogue = #{enCatalogue,jdbcType=LONGVARCHAR},
+      en_editorsChoice = #{enEditorschoice,jdbcType=LONGVARCHAR}
+    where seqid = #{seqid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" >
+    update front_ebook
+    set ClassID = #{classid,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      price = #{price,jdbcType=REAL},
+      eBookPrice = #{ebookprice,jdbcType=REAL},
+      author = #{author,jdbcType=VARCHAR},
+      publishTime = #{publishtime,jdbcType=DATE},
+      ebookStatus = #{ebookstatus,jdbcType=VARCHAR},
+      eBookTPrice = #{ebooktprice,jdbcType=REAL},
+      serialID = #{serialid,jdbcType=VARCHAR},
+      eBookFormat = #{ebookformat,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      score = #{score,jdbcType=REAL},
+      ISBN = #{isbn,jdbcType=VARCHAR},
+      EISBN = #{eisbn,jdbcType=VARCHAR},
+      publishHouse = #{publishhouse,jdbcType=VARCHAR},
+      page = #{page,jdbcType=INTEGER},
+      lessonType = #{lessontype,jdbcType=INTEGER},
+      applicableage = #{applicableage,jdbcType=INTEGER},
+      languageClass = #{languageclass,jdbcType=VARCHAR},
+      fullminusType = #{fullminustype,jdbcType=INTEGER},
+      iconUrl = #{iconurl,jdbcType=VARCHAR},
+      totalWord = #{totalword,jdbcType=INTEGER},
+      favoriteNum = #{favoritenum,jdbcType=INTEGER},
+      salesVolume = #{salesvolume,jdbcType=INTEGER},
+      commentNumber = #{commentnumber,jdbcType=INTEGER},
+      locationUrl = #{locationurl,jdbcType=VARCHAR},
+      academicProbationUrl = #{academicprobationurl,jdbcType=VARCHAR},
+      integraldeduction = #{integraldeduction,jdbcType=REAL},
+      en_name = #{enName,jdbcType=VARCHAR},
+      en_author = #{enAuthor,jdbcType=VARCHAR},
+      en_title = #{enTitle,jdbcType=VARCHAR},
+      en_publishHouse = #{enPublishhouse,jdbcType=VARCHAR},
+      en_lessonType = #{enLessontype,jdbcType=INTEGER},
+      en_languageClass = #{enLanguageclass,jdbcType=VARCHAR},
+      createdtime = #{createdtime,jdbcType=TIMESTAMP},
+      creatorid = #{creatorid,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      isdisplay = #{isdisplay,jdbcType=INTEGER},
+      sort = #{sort,jdbcType=INTEGER},
+      isRecommend = #{isrecommend,jdbcType=INTEGER},
+      isNewbook = #{isnewbook,jdbcType=INTEGER},
+      themeId = #{themeid,jdbcType=INTEGER},
+      bookdes = #{bookdes,jdbcType=VARCHAR},
+      locationsize = #{locationsize,jdbcType=BIGINT},
+      academicsize = #{academicsize,jdbcType=BIGINT},
+      isallseries = #{isallseries,jdbcType=VARCHAR}
+    where seqid = #{seqid,jdbcType=INTEGER}
+  </update>
+  
+  <!-- ### 以上代码由MBG + CommentPlugin自动生成, 生成时间: 2019-03-04 11:42:34 ### -->
+
+
+
+  <!-- Your codes goes here!!! -->
+  
+</mapper>

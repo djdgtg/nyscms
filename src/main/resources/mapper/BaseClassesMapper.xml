@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.retech.nyscms.mapper.BaseClassesMapper" >
+  <resultMap id="BaseResultMap" type="com.retech.nyscms.entity.BaseClasses" >
+    
+    <!-- 分类ID -->
+    <id column="ClassID" property="classid" jdbcType="INTEGER" />
+    
+    <!-- 父分类 -->
+    <result column="ParentClassID" property="parentclassid" jdbcType="INTEGER" />
+    
+    <!-- 分类名 -->
+    <result column="ClassName" property="classname" jdbcType="VARCHAR" />
+    
+    <!-- 英文分类名 -->
+    <result column="en_ClassName" property="enClassname" jdbcType="VARCHAR" />
+    
+    <!-- 备注 -->
+    <result column="Remarks" property="remarks" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ClassID, ParentClassID, ClassName, en_ClassName, Remarks
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.retech.nyscms.entity.BaseClassesExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from base_classes
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from base_classes
+    where ClassID = #{classid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from base_classes
+    where ClassID = #{classid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.retech.nyscms.entity.BaseClassesExample" >
+    delete from base_classes
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" >
+    insert into base_classes (ClassID, ParentClassID, ClassName, 
+      en_ClassName, Remarks)
+    values (#{classid,jdbcType=INTEGER}, #{parentclassid,jdbcType=INTEGER}, #{classname,jdbcType=VARCHAR}, 
+      #{enClassname,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" >
+    insert into base_classes
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="classid != null" >
+        ClassID,
+      </if>
+      <if test="parentclassid != null" >
+        ParentClassID,
+      </if>
+      <if test="classname != null" >
+        ClassName,
+      </if>
+      <if test="enClassname != null" >
+        en_ClassName,
+      </if>
+      <if test="remarks != null" >
+        Remarks,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="classid != null" >
+        #{classid,jdbcType=INTEGER},
+      </if>
+      <if test="parentclassid != null" >
+        #{parentclassid,jdbcType=INTEGER},
+      </if>
+      <if test="classname != null" >
+        #{classname,jdbcType=VARCHAR},
+      </if>
+      <if test="enClassname != null" >
+        #{enClassname,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.retech.nyscms.entity.BaseClassesExample" resultType="java.lang.Integer" >
+    select count(*) from base_classes
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update base_classes
+    <set >
+      <if test="record.classid != null" >
+        ClassID = #{record.classid,jdbcType=INTEGER},
+      </if>
+      <if test="record.parentclassid != null" >
+        ParentClassID = #{record.parentclassid,jdbcType=INTEGER},
+      </if>
+      <if test="record.classname != null" >
+        ClassName = #{record.classname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enClassname != null" >
+        en_ClassName = #{record.enClassname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remarks != null" >
+        Remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update base_classes
+    set ClassID = #{record.classid,jdbcType=INTEGER},
+      ParentClassID = #{record.parentclassid,jdbcType=INTEGER},
+      ClassName = #{record.classname,jdbcType=VARCHAR},
+      en_ClassName = #{record.enClassname,jdbcType=VARCHAR},
+      Remarks = #{record.remarks,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" >
+    update base_classes
+    <set >
+      <if test="parentclassid != null" >
+        ParentClassID = #{parentclassid,jdbcType=INTEGER},
+      </if>
+      <if test="classname != null" >
+        ClassName = #{classname,jdbcType=VARCHAR},
+      </if>
+      <if test="enClassname != null" >
+        en_ClassName = #{enClassname,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        Remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ClassID = #{classid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" >
+    update base_classes
+    set ParentClassID = #{parentclassid,jdbcType=INTEGER},
+      ClassName = #{classname,jdbcType=VARCHAR},
+      en_ClassName = #{enClassname,jdbcType=VARCHAR},
+      Remarks = #{remarks,jdbcType=VARCHAR}
+    where ClassID = #{classid,jdbcType=INTEGER}
+  </update>
+  
+  <!-- ### 以上代码由MBG + CommentPlugin自动生成, 生成时间: 2019-03-04 11:42:34 ### -->
+
+
+
+  <!-- Your codes goes here!!! -->
+  
+</mapper>
